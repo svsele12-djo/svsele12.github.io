@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>다낭 커플 여행 가이드북 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+:root {
+  --bg:      #f7f4ef;
+  --bg2:     #ffffff;
+  --card:    #ffffff;
+  --nav-bg:  rgba(255,252,246,0.97);
+  --border:  #e8e2d9;
+  --text:    #1e2a35;
+  --text2:   #4a5568;
+  --gray:    #8a97a8;
+  --teal:    #00807d;
+  --teal-l:  #e6f4f4;
+  --teal-m:  #b2dede;
+  --gold:    #a07828;
+  --gold-l:  #fdf6e3;
+  --accent:  #c05a20;
+  --accent-l:#fdf0e8;
+  --green:   #2a7a4a;
+  --green-l: #eaf4ee;
+  --purple:  #6040a0;
+  --purple-l:#f0ecf8;
+  --red:     #b83030;
+  --shadow:  0 2px 12px rgba(0,0,0,0.07);
+  --shadow2: 0 6px 24px rgba(0,0,0,0.10);
+  --day1: #00807d; --day1-l: #e6f4f4;
+  --day2: #c05a20; --day2-l: #fdf0e8;
+  --day3: #00807d; --day3-l: #e6f4f4;
+  --day4: #2a7a4a; --day4-l: #eaf4ee;
+  --day5: #6040a0; --day5-l: #f0ecf8;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Noto Sans KR',sans-serif;
+  background:var(--bg); color:var(--text);
+  overflow-x:hidden; line-height:1.6;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  background:var(--nav-bg);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 1px 8px rgba(0,0,0,0.06);
+  display:flex; align-items:center;
+  padding:0 24px; height:58px; gap:4px;
+}
+.nav-logo{
+  font-family:'Playfair Display',serif;
+  font-size:17px; color:var(--teal);
+  margin-right:28px; white-space:nowrap;
+  letter-spacing:0.3px; font-weight:700;
+}
+.nav-logo span{color:var(--gold);}
+.nav-tabs{display:flex; gap:2px; flex:1; overflow-x:auto;}
+.nav-tabs::-webkit-scrollbar{display:none;}
+.tab-btn{
+  padding:7px 15px; border:none;
+  background:transparent; color:var(--gray);
+  font-family:'Noto Sans KR',sans-serif;
+  font-size:13px; font-weight:500;
+  cursor:pointer; border-radius:20px;
+  transition:all 0.2s; white-space:nowrap;
+  display:flex; align-items:center; gap:6px;
+}
+.tab-btn:hover{color:var(--text); background:var(--bg);}
+.tab-btn.active{color:var(--bg2); font-weight:700;}
+.tab-btn .dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+
+/* ── SECTIONS ── */
+section{display:none; min-height:100vh; padding-top:58px; animation:fadeIn 0.3s ease;}
+section.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── MAIN HERO ── */
+.hero{
+  background:linear-gradient(135deg, #f0ede6 0%, #e8f4f3 50%, #fdf6e3 100%);
+  padding:60px 60px 50px;
+  border-bottom:1px solid var(--border);
+  position:relative; overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,128,125,0.08),transparent 70%);
+  pointer-events:none;
+}
+.hero-eyebrow{
+  font-family:'DM Mono',monospace; font-size:11px;
+  letter-spacing:2.5px; text-transform:uppercase;
+  color:var(--teal); margin-bottom:16px;
+  display:flex; align-items:center; gap:10px;
+}
+.hero-eyebrow::after{content:'';width:40px;height:1px;background:var(--teal);opacity:0.4;}
+.hero-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(44px,6vw,72px); font-weight:700;
+  line-height:1.08; color:var(--text); margin-bottom:14px;
+}
+.hero-title em{color:var(--teal); font-style:italic;}
+.hero-sub{font-size:16px; color:var(--text2); margin-bottom:40px; max-width:520px;}
+.hero-chips{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:48px;}
+.chip{
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:8px; padding:8px 16px;
+  box-shadow:var(--shadow);
+}
+.chip .cl{font-size:10px;color:var(--gray);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:2px;}
+.chip .cv{font-size:13px;font-weight:600;color:var(--text);}
+
+.day-cards{display:grid; grid-template-columns:repeat(5,1fr); gap:12px; max-width:860px;}
+.dc{
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:12px; padding:16px 14px;
+  cursor:pointer; transition:all 0.22s;
+  text-align:center; box-shadow:var(--shadow);
+  border-top:3px solid transparent;
+}
+.dc:hover{transform:translateY(-3px); box-shadow:var(--shadow2);}
+.dc .dnum{
+  font-family:'Playfair Display',serif;
+  font-size:24px; font-weight:700; margin-bottom:3px;
+}
+.dc .ddate{font-size:11px;color:var(--gray);margin-bottom:8px;}
+.dc .dtheme{font-size:11.5px;line-height:1.5;color:var(--text2);}
+.dc .dbudget{font-size:11px;font-weight:700;margin-top:9px;padding-top:9px;border-top:1px solid var(--border);}
+
+/* ── OVERVIEW SECTION ── */
+.ov-wrap{max-width:1100px;margin:0 auto;padding:48px 40px;}
+.ov-title{
+  font-family:'Playfair Display',serif;
+  font-size:28px; font-weight:700; color:var(--text);
+  margin-bottom:6px;
+}
+.ov-sub{color:var(--gray);font-size:14px;margin-bottom:32px;}
+.ov-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px;}
+.panel{
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:14px; overflow:hidden; box-shadow:var(--shadow);
+}
+.panel-hdr{
+  padding:14px 20px; font-size:13px; font-weight:700;
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; gap:8px;
+}
+.panel-body{padding:18px 20px;}
+.pr{display:flex;gap:10px;margin-bottom:8px;font-size:13px;}
+.pr .k{color:var(--gray);min-width:68px;flex-shrink:0;}
+.pr .v{color:var(--text);font-weight:500;}
+.tip-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px;}
+.tip-item{
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:10px; padding:14px 16px; box-shadow:var(--shadow);
+}
+.tip-item .ti{font-size:18px;margin-bottom:6px;}
+.tip-item .tt{font-size:12.5px;font-weight:700;color:var(--teal);margin-bottom:4px;}
+.tip-item .td{font-size:12px;color:var(--text2);line-height:1.55;}
+.total-banner{
+  background:linear-gradient(135deg,var(--teal-l),var(--gold-l));
+  border:1px solid var(--teal-m); border-radius:14px;
+  padding:28px 32px; display:flex;
+  justify-content:space-between; align-items:center;
+  box-shadow:var(--shadow);
+}
+.tb-l .big{
+  font-family:'Playfair Display',serif;
+  font-size:40px; font-weight:700; color:var(--teal);
+}
+.tb-l .note{font-size:12px;color:var(--gray);margin-top:4px;}
+.tb-r{text-align:right;}
+.tb-r .lab{font-size:11px;color:var(--gray);margin-bottom:6px;}
+.tb-r .row{font-size:13px;color:var(--text2);margin-top:3px;}
+
+/* ── DAY HERO ── */
+.day-hdr{
+  padding:32px 40px 28px;
+  border-bottom:1px solid var(--border);
+  position:relative; overflow:hidden;
+}
+.day-hdr::after{
+  content:''; position:absolute; right:-40px; top:-40px;
+  width:220px;height:220px;border-radius:50%;opacity:0.12;
+}
+.day-eyebrow{
+  font-family:'DM Mono',monospace; font-size:11px;
+  letter-spacing:2px; text-transform:uppercase;
+  margin-bottom:8px;
+}
+.day-h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(24px,4vw,36px); font-weight:700;
+  color:var(--text); margin-bottom:6px;
+}
+.day-hsub{font-size:14px;color:var(--text2);}
+
+/* ── DAY BODY ── */
+.day-body{
+  max-width:1200px; margin:0 auto;
+  padding:32px 40px;
+  display:grid; grid-template-columns:1fr 360px; gap:28px;
+}
+@media(max-width:900px){.day-body{grid-template-columns:1fr;padding:20px;}}
+
+/* ── MAP ── */
+.map-card{
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:14px; overflow:hidden;
+  box-shadow:var(--shadow); margin-bottom:24px;
+}
+.map-hdr{
+  padding:13px 18px;
+  border-bottom:1px solid var(--border);
+  font-size:13px; font-weight:700; color:var(--text);
+  display:flex; align-items:center; gap:8px;
+}
+.map-hdr::before{content:'';width:3px;height:14px;border-radius:2px;flex-shrink:0;}
+.map-wrap{height:310px;}
+.map-wrap .leaflet-container{background:#e8f0f4;}
+.map-leg{
+  padding:10px 18px; background:var(--bg);
+  display:flex; flex-wrap:wrap; gap:10px;
+  border-top:1px solid var(--border);
+}
+.leg-i{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text2);}
+.leg-d{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+
+/* ── SECTION LABEL ── */
+.sec-label{
+  font-family:'DM Mono',monospace; font-size:11px;
+  letter-spacing:2px; text-transform:uppercase;
+  color:var(--teal); margin-bottom:14px;
+  padding-bottom:8px; border-bottom:2px solid var(--teal-m);
+}
+
+/* ── TIMELINE WITH DROPDOWN ── */
+.tl{position:relative;}
+.tl-item{margin-bottom:6px;}
+.tl-trigger{
+  display:flex; gap:0; cursor:pointer;
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:10px; overflow:hidden;
+  box-shadow:var(--shadow);
+  transition:box-shadow 0.2s, border-color 0.2s;
+}
+.tl-trigger:hover{box-shadow:var(--shadow2);}
+.tl-trigger.open{border-radius:10px 10px 0 0; border-bottom-color:transparent;}
+.tl-trigger.hl{border-left:3px solid var(--teal);}
+.tl-trigger.hl .tl-time{background:var(--teal-l);}
+.tl-time-box{
+  width:60px; flex-shrink:0;
+  font-family:'DM Mono',monospace; font-size:11px;
+  color:var(--gray); padding:11px 8px;
+  text-align:center; line-height:1.3;
+  background:var(--bg); border-right:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+}
+.tl-main{
+  flex:1; padding:10px 14px;
+  display:flex; align-items:center; gap:10px; min-width:0;
+}
+.tl-texts{flex:1; min-width:0;}
+.tl-place{font-size:13px;font-weight:700;color:var(--text);}
+.tl-sub{font-size:12px;color:var(--text2);margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+.tl-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.cbadge{
+  font-size:11px; font-weight:700;
+  padding:3px 8px; border-radius:5px; white-space:nowrap;
+}
+.cb-free{background:var(--green-l);color:var(--green);}
+.cb-inc {background:#f0f0f0;color:#777;}
+.cb-vnd {background:var(--accent-l);color:var(--accent);}
+.cb-usd {background:var(--gold-l);color:var(--gold);}
+.tl-chevron{
+  width:20px;height:20px;border-radius:50%;
+  background:var(--bg); border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0; transition:transform 0.25s;
+  font-size:10px; color:var(--gray);
+}
+.tl-trigger.open .tl-chevron{transform:rotate(180deg); background:var(--teal); color:#fff; border-color:var(--teal);}
+
+/* ── DROPDOWN PANEL ── */
+.tl-dropdown{
+  display:none; overflow:hidden;
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-top:none;
+  border-radius:0 0 10px 10px;
+  box-shadow:var(--shadow);
+}
+.tl-dropdown.open{display:block; animation:slideDown 0.25s ease;}
+@keyframes slideDown{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.dd-inner{display:grid;grid-template-columns:180px 1fr;gap:0;}
+.dd-img{
+  width:180px; height:130px; object-fit:cover;
+  display:block; flex-shrink:0;
+  border-right:1px solid var(--border);
+}
+.dd-img-placeholder{
+  width:180px; height:130px; flex-shrink:0;
+  background:linear-gradient(135deg,var(--teal-l),var(--bg));
+  display:flex; align-items:center; justify-content:center;
+  font-size:28px; border-right:1px solid var(--border);
+}
+.dd-content{padding:14px 18px;}
+.dd-desc{font-size:13px;color:var(--text2);line-height:1.65;margin-bottom:10px;}
+.dd-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.dd-tag{
+  font-size:11px; padding:3px 9px; border-radius:12px;
+  background:var(--bg); border:1px solid var(--border);
+  color:var(--text2);
+}
+
+/* ── RIGHT PANEL ── */
+.right-col{display:flex;flex-direction:column;gap:18px;}
+
+/* Budget */
+.budget-card{
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:14px; overflow:hidden; box-shadow:var(--shadow);
+}
+.budget-hdr{
+  padding:13px 18px; font-size:13px; font-weight:700;
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; gap:8px;
+}
+.budget-hdr .bicon{font-size:16px;}
+.brow{
+  display:flex; align-items:center;
+  padding:9px 18px; gap:8px; font-size:12.5px;
+  border-bottom:1px solid var(--border);
+}
+.brow:last-child{border-bottom:none;}
+.brow .bl{flex:1;color:var(--text2);}
+.brow .bvnd{font-size:11px;color:var(--gray);font-family:'DM Mono',monospace;}
+.brow .bkrw{font-weight:700;color:var(--text);min-width:85px;text-align:right;}
+.budget-total{
+  padding:12px 18px; background:var(--bg);
+  border-top:1px solid var(--border);
+  display:flex; justify-content:space-between; align-items:center;
+}
+.budget-total .tl2{font-size:12px;font-weight:700;color:var(--text2);}
+.budget-total .ta{font-size:16px;font-weight:700;font-family:'Playfair Display',serif;}
+
+/* Info card */
+.info-card{
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:12px; padding:16px 18px; box-shadow:var(--shadow);
+}
+.info-card h4{
+  font-size:13px;font-weight:700;color:var(--text);
+  margin-bottom:12px;padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+}
+.ii{display:flex;gap:8px;margin-bottom:7px;font-size:12.5px;}
+.ii .ik{color:var(--gray);flex-shrink:0;min-width:52px;}
+.ii .iv{color:var(--text);}
+
+/* Tip */
+.tip-box{
+  background:var(--gold-l); border:1px solid #e8d0a0;
+  border-left:3px solid var(--gold);
+  border-radius:8px; padding:13px 15px;
+  font-size:12.5px; color:var(--text2); line-height:1.6;
+}
+.tip-box strong{color:var(--gold);}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:#ddd;border-radius:3px;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">다낭 <span>2026</span></div>
+  <div class="nav-tabs">
+    <button class="tab-btn active" onclick="showTab('main')" style="background:var(--teal);color:#fff" id="btn-main">
+      <span class="dot" style="background:#fff"></span>개요
+    </button>
+    <button class="tab-btn" onclick="showTab('day1')" id="btn-day1">
+      <span class="dot" style="background:var(--day1)"></span>DAY 1 · 7/17
+    </button>
+    <button class="tab-btn" onclick="showTab('day2')" id="btn-day2">
+      <span class="dot" style="background:var(--day2)"></span>DAY 2 · 7/18
+    </button>
+    <button class="tab-btn" onclick="showTab('day3')" id="btn-day3">
+      <span class="dot" style="background:var(--day3)"></span>DAY 3 · 7/19
+    </button>
+    <button class="tab-btn" onclick="showTab('day4')" id="btn-day4">
+      <span class="dot" style="background:var(--day4)"></span>DAY 4 · 7/20
+    </button>
+    <button class="tab-btn" onclick="showTab('day5')" id="btn-day5">
+      <span class="dot" style="background:var(--day5)"></span>DAY 5 · 7/21
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════ MAIN ══════════════ -->
+<section id="main" class="active">
+  <div class="hero">
+    <div class="hero-eyebrow">Vietnam · Central Coast · 2026</div>
+    <h1 class="hero-title">다낭<br><em>커플 여행</em></h1>
+    <p class="hero-sub">신라모노그램 다낭 거점으로 머드온천 · 호이안 · 마사지 · 리조트 풀데이까지</p>
+    <div class="hero-chips">
+      <div class="chip"><span class="cl">항공편</span><span class="cv">베트남항공 VN431/430</span></div>
+      <div class="chip"><span class="cl">숙소</span><span class="cv">Shilla Monogram Danang</span></div>
+      <div class="chip"><span class="cl">여행자</span><span class="cv">CHOI SEOYOON &amp; OH DONGJUN</span></div>
+      <div class="chip"><span class="cl">예약번호</span><span class="cv">1400825104133466</span></div>
+      <div class="chip"><span class="cl">PNR</span><span class="cv" style="color:var(--teal);font-weight:700">CACZTD</span></div>
+    </div>
+    <div class="day-cards">
+      <div class="dc" onclick="showTab('day1')" style="border-top-color:var(--day1)">
+        <div class="dnum" style="color:var(--day1)">1</div>
+        <div class="ddate">7/17 (금)</div>
+        <div class="dtheme">공항 도착<br>한시장 쇼핑<br>마사지 90분<br>An Thoi 저녁</div>
+        <div class="dbudget" style="color:var(--day1)">약 10~12만원</div>
+      </div>
+      <div class="dc" onclick="showTab('day2')" style="border-top-color:var(--day2)">
+        <div class="dnum" style="color:var(--day2)">2</div>
+        <div class="ddate">7/18 (토)</div>
+        <div class="dtheme">누이딴따이<br>머드온천<br>호이안 야경<br>랜턴 투어</div>
+        <div class="dbudget" style="color:var(--day2)">약 20~28만원</div>
+      </div>
+      <div class="dc" onclick="showTab('day3')" style="border-top-color:var(--day3)">
+        <div class="dnum" style="color:var(--day3)">3</div>
+        <div class="ddate">7/19 (일)</div>
+        <div class="dtheme">다낭 시내<br>미슐랭 맛집<br>롯데마트<br>카페 투어</div>
+        <div class="dbudget" style="color:var(--day3)">약 5~9만원+쇼핑</div>
+      </div>
+      <div class="dc" onclick="showTab('day4')" style="border-top-color:var(--day4)">
+        <div class="dnum" style="color:var(--day4)">4</div>
+        <div class="ddate">7/20 (월)</div>
+        <div class="dtheme">리조트<br>풀데이<br>설화수 스파<br>파인다이닝</div>
+        <div class="dbudget" style="color:var(--day4)">약 25~33만원</div>
+      </div>
+      <div class="dc" onclick="showTab('day5')" style="border-top-color:var(--day5)">
+        <div class="dnum" style="color:var(--day5)">5</div>
+        <div class="ddate">7/21 (화)</div>
+        <div class="dtheme">체크아웃<br>시내 맛집<br>기념품<br>귀국 23:30</div>
+        <div class="dbudget" style="color:var(--day5)">약 5~8만원</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ov-wrap">
+    <div class="ov-title">여행 상세 정보</div>
+    <div class="ov-sub">항공 · 호텔 · 실용 정보 한눈에 보기</div>
+
+    <div class="ov-grid-2">
+      <div class="panel">
+        <div class="panel-hdr" style="color:var(--teal)">✈ 항공편 (사전결제 완료)</div>
+        <div class="panel-body">
+          <div class="pr"><span class="k">출발</span><span class="v">2026.07.17(금) 11:05  인천 T1 → 다낭 T2  13:50</span></div>
+          <div class="pr"><span class="k">편명</span><span class="v">베트남항공 VN431</span></div>
+          <div class="pr"><span class="k">귀국</span><span class="v">2026.07.21(화) 23:30  다낭 T2 → 인천 T1  07/22 06:00</span></div>
+          <div class="pr"><span class="k">편명</span><span class="v">베트남항공 VN430</span></div>
+          <div class="pr"><span class="k">PNR</span><span class="v" style="color:var(--teal);font-weight:700">CACZTD</span></div>
+          <div class="pr"><span class="k">수하물</span><span class="v">위탁 23kg / 기내+개인 10kg (인당)</span></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-hdr" style="color:var(--green)">🏨 호텔 (사전결제 완료)</div>
+        <div class="panel-body">
+          <div class="pr"><span class="k">호텔</span><span class="v">Shilla Monogram Danang</span></div>
+          <div class="pr"><span class="k">객실</span><span class="v">프리미어 디럭스 오션뷰 더블</span></div>
+          <div class="pr"><span class="k">체크인</span><span class="v">2026.07.17  15:00~</span></div>
+          <div class="pr"><span class="k">체크아웃</span><span class="v">2026.07.21  ~12:00 (4박)</span></div>
+          <div class="pr"><span class="k">조식</span><span class="v">매일 2인 포함 (18일~21일)</span></div>
+          <div class="pr"><span class="k">보증금</span><span class="v">VND 2,000,000/일  체크인 시 현장결제</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip-grid">
+      <div class="tip-item"><div class="ti">💱</div><div class="tt">환전</div><div class="td">USD 현금 → 다낭 시내 금은방 재환전이 최고 환율. 10,000 VND ≈ 550원</div></div>
+      <div class="tip-item"><div class="ti">📱</div><div class="tt">Grab + eSIM</div><div class="td">Grab 한국서 미리 설치·카드 등록. eSIM Klook 사전 구매 (~8,000원/5일)</div></div>
+      <div class="tip-item"><div class="ti">🌡</div><div class="tt">7월 날씨</div><div class="td">평균 33~35°C, 건기. UV 극강 → SPF50+ 필수. 스콜은 30~60분짜리</div></div>
+      <div class="tip-item"><div class="ti">💳</div><div class="tt">결제</div><div class="td">대형 식당·호텔 카드 가능. 시장·로컬 식당은 현금 전용. 흥정은 기본!</div></div>
+      <div class="tip-item"><div class="ti">🚗</div><div class="tt">이동수단</div><div class="td">Day1·3·5 Grab / Day2 기사포함 차량 ($50~80) / Day4 리조트만</div></div>
+      <div class="tip-item"><div class="ti">⏰</div><div class="tt">시차</div><div class="td">한국보다 2시간 느림. 한국 정오 = 다낭 오전 10시.</div></div>
+    </div>
+
+    <div class="total-banner">
+      <div class="tb-l">
+        <div style="font-size:13px;color:var(--gray);margin-bottom:6px;">현지 지출 총합계 (2인, 항공·호텔 제외)</div>
+        <div class="big">65 ~ 90만원</div>
+        <div class="note">스파·쇼핑 규모에 따라 변동 / 롯데마트 쇼핑 별도</div>
+      </div>
+      <div class="tb-r">
+        <div class="lab">일별 예산 요약</div>
+        <div class="row">Day 1  ·  약 10~12만원</div>
+        <div class="row">Day 2  ·  약 20~28만원</div>
+        <div class="row">Day 3  ·  약 5~9만원 + 쇼핑</div>
+        <div class="row">Day 4  ·  약 25~33만원</div>
+        <div class="row">Day 5  ·  약 5~8만원</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ DAY 1 ══════════════ -->
+<section id="day1">
+  <div class="day-hdr" style="background:linear-gradient(135deg,var(--teal-l),#fff)">
+    <div class="day-eyebrow" style="color:var(--day1)">DAY 1  ·  2026년 7월 17일 (금)</div>
+    <h1 class="day-h1">도착 · 한시장 쇼핑 · 마사지 · 저녁</h1>
+    <div class="day-hsub">공항 도착 → 호텔 체크인 → 한시장(1h) → Jang Mi Spa 90분 → An Thoi 저녁</div>
+  </div>
+  <div class="day-body">
+    <div>
+      <div class="map-card">
+        <div class="map-hdr" style="--mc:var(--day1)"><span style="background:var(--day1)" class="map-hdr::before"></span>이동 경로 지도</div>
+        <div class="map-wrap" id="map1"></div>
+        <div class="map-leg">
+          <div class="leg-i"><div class="leg-d" style="background:#e65100"></div>공항→호텔</div>
+          <div class="leg-i"><div class="leg-d" style="background:var(--teal)"></div>호텔→한시장</div>
+          <div class="leg-i"><div class="leg-d" style="background:#c62828"></div>한시장→Jang Mi Spa (도보 7분)</div>
+          <div class="leg-i"><div class="leg-d" style="background:#1565c0"></div>스파→An Thoi (도보 3분)</div>
+        </div>
+      </div>
+      <div class="sec-label">시간별 일정  <span style="font-size:10px;color:var(--gray);margin-left:8px">▼ 항목을 클릭하면 상세 정보가 펼쳐집니다</span></div>
+      <div class="tl" id="tl1"></div>
+    </div>
+    <div class="right-col">
+      <div class="budget-card">
+        <div class="budget-hdr" style="color:var(--day1)"><span class="bicon">💰</span>당일 예산 (2인)</div>
+        <div id="bud1"></div>
+        <div class="budget-total"><span class="tl2">합계</span><span class="ta" style="color:var(--day1)">약 10~12만원</span></div>
+      </div>
+      <div class="info-card">
+        <h4>🛍 한시장 쇼핑 공략</h4>
+        <div class="ii"><span class="ik">크록스</span><span class="iv">4층 · 정품 · M11까지</span></div>
+        <div class="ii"><span class="ik">의류</span><span class="iv">2층 전체 코너</span></div>
+        <div class="ii"><span class="ik">흥정</span><span class="iv">호가의 40~50%부터</span></div>
+        <div class="ii"><span class="ik">결제</span><span class="iv">현금 전용!</span></div>
+        <div class="ii"><span class="ik">마감</span><span class="iv" style="color:var(--accent);font-weight:600">오후 7시 (19:00)</span></div>
+      </div>
+      <div class="info-card">
+        <h4>💆 Jang Mi Spa</h4>
+        <div class="ii"><span class="ik">주소</span><span class="iv">53 Thai Phien, Hai Chau</span></div>
+        <div class="ii"><span class="ik">전화</span><span class="iv">+84 986 428 400</span></div>
+        <div class="ii"><span class="ik">운영</span><span class="iv">09:30~22:00</span></div>
+        <div class="ii"><span class="ik">평점</span><span class="iv" style="color:var(--gold);font-weight:600">★ 4.9 / 2,675개 리뷰</span></div>
+        <div class="ii"><span class="ik">추천</span><span class="iv">핫스톤 오일 90분 ~400,000 VND/인</span></div>
+      </div>
+      <div class="tip-box"><strong>동선 꿀팁:</strong> 한시장 → 스파 → 저녁이 모두 반경 500m 이내! 쇼핑 후 도보 7분 스파, 마사지 후 도보 3분 저녁으로 이어집니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ DAY 2 ══════════════ -->
+<section id="day2">
+  <div class="day-hdr" style="background:linear-gradient(135deg,var(--accent-l),#fff)">
+    <div class="day-eyebrow" style="color:var(--day2)">DAY 2  ·  2026년 7월 18일 (토)</div>
+    <h1 class="day-h1">누이딴따이 머드온천  +  호이안 고대도시</h1>
+    <div class="day-hsub">기사포함 차량 대절 · 오전 머드온천 · 저녁 호이안 랜턴 야경</div>
+  </div>
+  <div class="day-body">
+    <div>
+      <div class="map-card">
+        <div class="map-hdr">이동 경로 지도</div>
+        <div class="map-wrap" id="map2"></div>
+        <div class="map-leg">
+          <div class="leg-i"><div class="leg-d" style="background:var(--teal)"></div>호텔 (리조트 존)</div>
+          <div class="leg-i"><div class="leg-d" style="background:#c62828"></div>누이딴따이 온천 (서쪽 산속)</div>
+          <div class="leg-i"><div class="leg-d" style="background:#e65100"></div>호이안 고대도시</div>
+        </div>
+      </div>
+      <div class="sec-label">시간별 일정  <span style="font-size:10px;color:var(--gray);margin-left:8px">▼ 클릭하면 상세 정보가 펼쳐집니다</span></div>
+      <div class="tl" id="tl2"></div>
+    </div>
+    <div class="right-col">
+      <div class="budget-card">
+        <div class="budget-hdr" style="color:var(--day2)"><span class="bicon">💰</span>당일 예산 (2인)</div>
+        <div id="bud2"></div>
+        <div class="budget-total"><span class="tl2">합계</span><span class="ta" style="color:var(--day2)">약 20~28만원</span></div>
+      </div>
+      <div class="info-card">
+        <h4>🌋 누이딴따이 온천 공략</h4>
+        <div class="ii"><span class="ik">운영</span><span class="iv">08:30~17:30 매일</span></div>
+        <div class="ii"><span class="ik">입장권</span><span class="iv">약 250,000~350,000 VND/인</span></div>
+        <div class="ii"><span class="ik">머드배스</span><span class="iv">현장 추가결제 · 커플탕 가능</span></div>
+        <div class="ii"><span class="ik">수건</span><span class="iv" style="color:var(--accent);font-weight:600">직접 지참 필수! (불포함)</span></div>
+        <div class="ii"><span class="ik">복장</span><span class="iv">수영복 or 반팔+반바지</span></div>
+      </div>
+      <div class="info-card">
+        <h4>🏮 호이안 주의사항</h4>
+        <div class="ii"><span class="ik">차량</span><span class="iv" style="color:var(--accent);font-weight:600">15:00~21:30 진입 불가</span></div>
+        <div class="ii"><span class="ik">입장권</span><span class="iv">120,000 VND/인 · 현금 결제</span></div>
+        <div class="ii"><span class="ik">까오라우</span><span class="iv">매진 있으니 17시 이전 방문</span></div>
+      </div>
+      <div class="tip-box"><strong>차량 예약 필수!</strong> 마이리얼트립 or Klook에서 1주 전 예약. 머드배스는 입장 즉시 스파 창구에서 예약하세요!</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ DAY 3 ══════════════ -->
+<section id="day3">
+  <div class="day-hdr" style="background:linear-gradient(135deg,var(--teal-l),#fff)">
+    <div class="day-eyebrow" style="color:var(--day3)">DAY 3  ·  2026년 7월 19일 (일)</div>
+    <h1 class="day-h1">다낭 시내 자유여행  +  롯데마트</h1>
+    <div class="day-hsub">Grab으로 자유롭게 · 미슐랭 맛집 · 카페 · 롯데마트 · 반쎄오 저녁</div>
+  </div>
+  <div class="day-body">
+    <div>
+      <div class="map-card">
+        <div class="map-hdr">이동 경로 지도</div>
+        <div class="map-wrap" id="map3"></div>
+        <div class="map-leg">
+          <div class="leg-i"><div class="leg-d" style="background:var(--teal)"></div>호텔</div>
+          <div class="leg-i"><div class="leg-d" style="background:#e65100"></div>분짜까·반미·핑크성당·콩카페</div>
+          <div class="leg-i"><div class="leg-d" style="background:#ab47bc"></div>롯데마트</div>
+          <div class="leg-i"><div class="leg-d" style="background:#c62828"></div>반쎄오 바즈엉</div>
+        </div>
+      </div>
+      <div class="sec-label">시간별 일정  <span style="font-size:10px;color:var(--gray);margin-left:8px">▼ 클릭하면 상세 정보가 펼쳐집니다</span></div>
+      <div class="tl" id="tl3"></div>
+    </div>
+    <div class="right-col">
+      <div class="budget-card">
+        <div class="budget-hdr" style="color:var(--day3)"><span class="bicon">💰</span>당일 예산 (2인)</div>
+        <div id="bud3"></div>
+        <div class="budget-total"><span class="tl2">합계</span><span class="ta" style="color:var(--day3)">약 5~9만원 + 쇼핑</span></div>
+      </div>
+      <div class="info-card">
+        <h4>🛒 롯데마트 층별 안내</h4>
+        <div class="ii"><span class="ik">운영</span><span class="iv">07:30~22:00</span></div>
+        <div class="ii"><span class="ik">2층</span><span class="iv" style="color:var(--teal);font-weight:600">커피·과자·귀국선물 핵심!</span></div>
+        <div class="ii"><span class="ik">4층</span><span class="iv">크록스 정품 (M11까지)</span></div>
+        <div class="ii"><span class="ik">짐 보관</span><span class="iv">안면인식 보관함 · 무료</span></div>
+      </div>
+      <div class="tip-box"><strong>도보 동선:</strong> 분짜까 → 반미 → 핑크성당 → 콩카페가 모두 도보 5분 이내! Grab 없이 걸어서 이동 가능합니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ DAY 4 ══════════════ -->
+<section id="day4">
+  <div class="day-hdr" style="background:linear-gradient(135deg,var(--green-l),#fff)">
+    <div class="day-eyebrow" style="color:var(--day4)">DAY 4  ·  2026년 7월 20일 (월)</div>
+    <h1 class="day-h1">신라모노그램 리조트 풀데이</h1>
+    <div class="day-hsub">비치 · 인피니티 풀 · 설화수 스파 · 망고빙수 · 파인다이닝</div>
+  </div>
+  <div class="day-body">
+    <div>
+      <div class="map-card">
+        <div class="map-hdr">신라모노그램 다낭 위치</div>
+        <div class="map-wrap" id="map4"></div>
+        <div class="map-leg">
+          <div class="leg-i"><div class="leg-d" style="background:var(--green)"></div>Shilla Monogram Danang</div>
+          <div class="leg-i" style="color:var(--gray)">오늘은 리조트 밖으로 나가지 않아요!</div>
+        </div>
+      </div>
+      <div class="sec-label">시간별 일정  <span style="font-size:10px;color:var(--gray);margin-left:8px">▼ 클릭하면 상세 정보가 펼쳐집니다</span></div>
+      <div class="tl" id="tl4"></div>
+    </div>
+    <div class="right-col">
+      <div class="budget-card">
+        <div class="budget-hdr" style="color:var(--day4)"><span class="bicon">💰</span>당일 예산 (2인)</div>
+        <div id="bud4"></div>
+        <div class="budget-total"><span class="tl2">합계</span><span class="ta" style="color:var(--day4)">약 25~33만원</span></div>
+      </div>
+      <div class="info-card">
+        <h4>🏖 리조트 무료 시설</h4>
+        <div class="ii"><span class="ik">비치</span><span class="iv">하미 비치 전용 선베드 · 해수온 29°C</span></div>
+        <div class="ii"><span class="ik">풀</span><span class="iv">인피니티 풀 ×4 · 어덜트풀 추천</span></div>
+        <div class="ii"><span class="ik">사우나</span><span class="iv">Therapy Garden 자쿠지 포함</span></div>
+        <div class="ii"><span class="ik">피트니스</span><span class="iv">24시간 이용</span></div>
+      </div>
+      <div class="info-card">
+        <h4>💆 설화수 스파</h4>
+        <div class="ii"><span class="ik">운영</span><span class="iv">09:00~22:00</span></div>
+        <div class="ii"><span class="ik">예약</span><span class="iv" style="color:var(--accent);font-weight:600">체크인 당일 즉시!</span></div>
+        <div class="ii"><span class="ik">커플룸</span><span class="iv">2인 동시 트리트먼트 가능</span></div>
+        <div class="ii"><span class="ik">가격</span><span class="iv">90분 ~2,000,000 VND/인</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ DAY 5 ══════════════ -->
+<section id="day5">
+  <div class="day-hdr" style="background:linear-gradient(135deg,var(--purple-l),#fff)">
+    <div class="day-eyebrow" style="color:var(--day5)">DAY 5  ·  2026년 7월 21일 (화)</div>
+    <h1 class="day-h1">체크아웃 · 다낭 맛집 · 귀국</h1>
+    <div class="day-hsub">체크아웃 후 자유 11시간 · 미슐랭 맛집 투어 · 23:30 귀국 출발</div>
+  </div>
+  <div class="day-body">
+    <div>
+      <div class="map-card">
+        <div class="map-hdr">이동 경로 지도</div>
+        <div class="map-wrap" id="map5"></div>
+        <div class="map-leg">
+          <div class="leg-i"><div class="leg-d" style="background:var(--purple)"></div>호텔 → 시내</div>
+          <div class="leg-i"><div class="leg-d" style="background:#e65100"></div>씨푸드 저녁</div>
+          <div class="leg-i"><div class="leg-d" style="background:#c62828"></div>다낭 국제공항 T2</div>
+        </div>
+      </div>
+      <div class="sec-label">시간별 일정  <span style="font-size:10px;color:var(--gray);margin-left:8px">▼ 클릭하면 상세 정보가 펼쳐집니다</span></div>
+      <div class="tl" id="tl5"></div>
+    </div>
+    <div class="right-col">
+      <div class="budget-card">
+        <div class="budget-hdr" style="color:var(--day5)"><span class="bicon">💰</span>당일 예산 (2인)</div>
+        <div id="bud5"></div>
+        <div class="budget-total"><span class="tl2">합계</span><span class="ta" style="color:var(--day5)">약 5~8만원</span></div>
+      </div>
+      <div class="info-card">
+        <h4>✈ 공항 체크리스트</h4>
+        <div class="ii"><span class="ik">출발</span><span class="iv" style="color:var(--accent);font-weight:600">23:30  다낭 T2 국제선</span></div>
+        <div class="ii"><span class="ik">도착권장</span><span class="iv">20:30 (3시간 전)</span></div>
+        <div class="ii"><span class="ik">수하물</span><span class="iv">위탁 23kg / 기내+개인 10kg</span></div>
+        <div class="ii"><span class="ik">PNR</span><span class="iv" style="color:var(--teal);font-weight:700">CACZTD</span></div>
+        <div class="ii"><span class="ik">보조배터리</span><span class="iv">기내 반입 (위탁 불가!)</span></div>
+        <div class="ii"><span class="ik">VND</span><span class="iv">남은 돈 면세점에서 소진!</span></div>
+      </div>
+      <div class="tip-box">짐은 체크아웃 후 프런트에 <strong>무료 보관</strong>. 저녁 후 호텔 복귀해 짐 챙기고 공항 이동. VN430, 7/22(수) 06:00 인천 도착.</div>
+    </div>
+  </div>
+</section>
+
+<script>
+// ── TAB ────────────────────────────────────────────────────────
+const tabs=['main','day1','day2','day3','day4','day5'];
+const tabColors={main:'var(--teal)',day1:'var(--day1)',day2:'var(--day2)',day3:'var(--day3)',day4:'var(--day4)',day5:'var(--day5)'};
+
+function showTab(id){
+  tabs.forEach(t=>{
+    document.getElementById(t).classList.remove('active');
+    const btn=document.getElementById('btn-'+t);
+    btn.classList.remove('active');
+    btn.style.background='transparent';
+    btn.style.color='var(--gray)';
+  });
+  document.getElementById(id).classList.add('active');
+  const btn=document.getElementById('btn-'+id);
+  btn.classList.add('active');
+  btn.style.background=tabColors[id];
+  btn.style.color='#fff';
+  setTimeout(()=>initMap(id),120);
+}
+
+// ── DROPDOWN TOGGLE ────────────────────────────────────────────
+function toggleDD(el){
+  const dd=el.nextElementSibling;
+  const isOpen=el.classList.contains('open');
+  // Close all in same timeline
+  const tl=el.closest('.tl');
+  tl.querySelectorAll('.tl-trigger.open').forEach(t=>{
+    t.classList.remove('open');
+    t.nextElementSibling.classList.remove('open');
+  });
+  if(!isOpen){
+    el.classList.add('open');
+    dd.classList.add('open');
+  }
+}
+
+// ── TIMELINE BUILDER ───────────────────────────────────────────
+// item = {time, place, sub, cost, costType:'free'|'inc'|'vnd'|'usd'|'', hl, desc, img, emoji, tags}
+function buildTL(containerId, items){
+  const el=document.getElementById(containerId);
+  if(!el)return;
+  el.innerHTML=items.map((item,i)=>{
+    const {time,place,sub,cost,costType,hl,desc,img,emoji,tags=[]}=item;
+    let badge='';
+    if(costType==='free') badge=`<span class="cbadge cb-free">무료</span>`;
+    else if(costType==='inc') badge=`<span class="cbadge cb-inc">포함</span>`;
+    else if(costType==='usd') badge=`<span class="cbadge cb-usd">${cost}</span>`;
+    else if(cost) badge=`<span class="cbadge cb-vnd">${cost}</span>`;
+
+    const imgEl = img
+      ? `<img class="dd-img" src="${img}" alt="${place}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+      : '';
+    const placeholderEl=`<div class="dd-img-placeholder" style="${img?'display:none':''}">
+      <span style="font-size:36px">${emoji||'📍'}</span></div>`;
+    const tagsHtml=tags.map(t=>`<span class="dd-tag">${t}</span>`).join('');
+
+    return `<div class="tl-item">
+      <div class="tl-trigger${hl?' hl':''}" onclick="toggleDD(this)">
+        <div class="tl-time-box">${time}</div>
+        <div class="tl-main">
+          <div class="tl-texts">
+            <div class="tl-place">${emoji?emoji+' ':''} ${place}</div>
+            ${sub?`<div class="tl-sub">${sub}</div>`:''}
+          </div>
+          <div class="tl-right">
+            ${badge}
+            <div class="tl-chevron">▼</div>
+          </div>
+        </div>
+      </div>
+      <div class="tl-dropdown">
+        <div class="dd-inner">
+          ${imgEl}${placeholderEl}
+          <div class="dd-content">
+            <div class="dd-desc">${desc}</div>
+            <div class="dd-tags">${tagsHtml}</div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── BUDGET BUILDER ────────────────────────────────────────────
+function buildBud(id,rows){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.innerHTML=rows.map(([label,vnd,krw])=>`
+    <div class="brow">
+      <span class="bl">${label}</span>
+      <span class="bvnd">${vnd}</span>
+      <span class="bkrw">${krw}</span>
+    </div>`).join('');
+}
+
+// ── UNSPLASH IMAGES ──────────────────────────────────────────
+const I={
+  airport:  'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400&q=75',
+  hotel:    'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&q=75',
+  hanmkt:   'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=75',
+  massage:  'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=75',
+  antoi:    'https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=400&q=75',
+  grab:     'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&q=75',
+  mud:      'https://images.unsplash.com/photo-1596178065887-1198b6148b2b?w=400&q=75',
+  onsen:    'https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400&q=75',
+  hoian:    'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=400&q=75',
+  lantern:  'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&q=75',
+  caolau:   'https://images.unsplash.com/photo-1563245372-f21724e3856d?w=400&q=75',
+  banhmi:   'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?w=400&q=75',
+  cafe:     'https://images.unsplash.com/photo-1525610553991-2bede1a236e2?w=400&q=75',
+  lotte:    'https://images.unsplash.com/photo-1604719312566-8912e9c8a213?w=400&q=75',
+  banhxeo:  'https://images.unsplash.com/photo-1559314809-0d155014e29e?w=400&q=75',
+  beach:    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&q=75',
+  pool:     'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&q=75',
+  spa:      'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=75',
+  dining:   'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&q=75',
+  seafood:  'https://images.unsplash.com/photo-1559314809-0d155014e29e?w=400&q=75',
+  church:   'https://images.unsplash.com/photo-1549517045-bc93de199abe?w=400&q=75',
+  sunset:   'https://images.unsplash.com/photo-1476610182048-b716b8518aae?w=400&q=75',
+};
+
+// ── TIMELINE DATA ─────────────────────────────────────────────
+buildTL('tl1',[
+  {time:'13:50',place:'다낭 국제공항 T2 도착',sub:'VN431 · 입국심사 + 수하물 약 40분',costType:'',hl:false,emoji:'✈',
+   img:I.airport,desc:'인천을 출발한 베트남항공 VN431편이 다낭 국제공항 T2(국제선 터미널)에 도착합니다. 입국심사와 수하물 수령까지 약 40분 소요. 공항 내 SIM 카드나 eSIM을 미리 준비해두면 도착 즉시 Grab 호출이 가능합니다.',
+   tags:['T2 국제선','입국심사 약 40분','eSIM 활성화']},
+  {time:'14:30',place:'신라모노그램 다낭',sub:'Grab 이동 약 30분 · ~160,000 VND',cost:'~8,800원',costType:'vnd',hl:false,emoji:'🏨',
+   img:I.hotel,desc:'Grab 앱으로 신라모노그램 다낭까지 약 30분 이동합니다. 하미 비치 바로 앞에 위치한 5성급 리조트로, 오션뷰 객실에서 처음 만나는 베트남 바다를 감상하세요. 체크인은 15:00 이후이며, 일찍 도착하면 짐만 맡기고 바로 출발할 수 있습니다.',
+   tags:['체크인 15:00','짐만 두고 출발','오션뷰 객실']},
+  {time:'16:00',place:'한시장 (Han Market)',sub:'1시간 집중 쇼핑 · 크록스 4층 · 의류 2층',cost:'~10만원~',costType:'vnd',hl:true,emoji:'🛍',
+   img:I.hanmkt,desc:'다낭 최대 전통 시장으로 총 2층 규모입니다. 크록스 정품은 4층 신발 코너에서 M11 사이즈까지 구입 가능. 2층에는 린넨 반바지·티셔츠·아오자이 등 의류가 가득합니다. 흥정은 호가의 40~50%부터 시작하고, 현금만 가능! 마감이 오후 7시라 1시간 여유롭게 구경하세요.',
+   tags:['마감 19:00 주의!','현금 전용','크록스 4층','흥정 필수']},
+  {time:'17:00',place:'도보 이동 → Jang Mi Spa',sub:'도보 7분',costType:'free',hl:false,emoji:'🚶',
+   img:null,desc:'한시장에서 도보 7분이면 Jang Mi Spa에 도착합니다. 걸어가면서 Bach Dang 강변 거리를 잠깐 구경할 수 있어요.',
+   tags:['도보 7분']},
+  {time:'17:10',place:'Jang Mi Spa · 마사지 90분',sub:'구글 ★4.9 / 2,675개 리뷰 · 커플룸 가능',cost:'~4.4만원/인',costType:'vnd',hl:true,emoji:'💆',
+   img:I.massage,desc:'다낭 한강 근처 최고 평점 스파. 90분 핫스톤 오일 마사지가 특히 인기입니다. 여행 첫날 비행 피로를 한 번에 해소하기 딱 좋은 코스예요. 커플 동시 트리트먼트룸을 원하면 예약 시 미리 요청하세요. 마사지 후 향긋한 아로마 향이 저녁 내내 이어집니다.',
+   tags:['사전 예약 권장','핫스톤 오일 추천','커플룸 가능','★4.9']},
+  {time:'18:50',place:'도보 이동 → An Thoi',sub:'마사지 직후 도보 3분',costType:'free',hl:false,emoji:'🚶',
+   img:null,desc:'스파에서 나오면 바로 코앞에 An Thoi 식당이 있습니다. 마사지의 여운을 느끼며 도보 3분으로 이동.',
+   tags:['도보 3분']},
+  {time:'19:00',place:'An Thoi 저녁식사',sub:'2024 미슐랭 빕구르망 · 번호표 15~30분 대기',cost:'~2.2~2.7만원/인',costType:'vnd',hl:true,emoji:'🍽',
+   img:I.antoi,desc:'114 Bach Dang Street에 위치한 2024 미슐랭 빕구르망 레스토랑. 입장 시 번호표를 뽑고 강변에서 대기하면 됩니다. 반쎄오(베트남 팬케이크), 쌀국수, 해산물 볶음밥이 인기 메뉴. 프랑스 식민지 시대 건물을 개조한 예쁜 인테리어도 포토 스팟입니다.',
+   tags:['미슐랭 빕구르망','번호표 대기','반쎄오 추천','Bach Dang 강변']},
+  {time:'20:15',place:'Grab으로 호텔 복귀',sub:'약 30분 · ~130,000 VND · 내일 08:00 출발 대비',cost:'~7,150원',costType:'vnd',hl:false,emoji:'🚕',
+   img:I.grab,desc:'내일 머드온천을 위해 08:00 호텔 출발이 예정되어 있으니, 오늘은 일찍 복귀해 충분히 쉬는 것이 좋습니다. Grab 앱으로 호출하면 약 30분이면 호텔에 도착합니다.',
+   tags:['Grab 앱 사용','내일 08:00 출발 대비']},
+]);
+
+buildBud('bud1',[
+  ['Grab 이동 합계','420,000 VND','~23,100원'],
+  ['한시장 쇼핑','200,000~400,000 VND','~11~22만원'],
+  ['마사지 90분 (2인)','800,000~1,000,000 VND','~44~55,000원'],
+  ['저녁 An Thoi (2인)','300,000~500,000 VND','~16,500~27,500원'],
+]);
+
+buildTL('tl2',[
+  {time:'08:00',place:'호텔 출발',sub:'기사포함 차량 · 서쪽 산악도로 50분',cost:'$50~80',costType:'usd',hl:false,emoji:'🚗',
+   img:I.grab,desc:'마이리얼트립 또는 Klook에서 사전 예약한 기사포함 차량으로 출발합니다. 다낭 서쪽 산악 지역으로 약 50분 이동. 차창 밖으로 베트남 시골 풍경을 감상할 수 있어요.',
+   tags:['사전 예약 필수','마이리얼트립·Klook','약 50분']},
+  {time:'08:50',place:'누이딴따이 온천공원 도착',sub:'운영 08:30~17:30 · 입장권 구매',cost:'~1.4~2.2만원/인',costType:'vnd',hl:false,emoji:'🌋',
+   img:I.onsen,desc:'다낭에서 가장 유명한 온천공원. 해발 300m 산속에 위치해 공기가 맑고 자연 경관이 아름답습니다. 입장 즉시 머드배스 스파 창구에서 예약을 먼저 하는 것이 핵심!',
+   tags:['구글 ★4.3','머드배스 즉시 예약!','수건 직접 지참']},
+  {time:'09:20',place:'머드배스 체험',sub:'개인탕 or 커플탕 · 약 30~40분',cost:'~1만원/인',costType:'vnd',hl:true,emoji:'🛁',
+   img:I.mud,desc:'미네랄이 풍부한 천연 머드를 온몸에 바르고 따뜻한 탕에서 목욕하는 체험. 피부 미용 효과가 뛰어나 커플에게 특히 인기입니다. 커플탕은 2인이 함께 이용할 수 있는 개인 탕으로, 예약 시 요청하세요. 머드를 바른 후 15~20분 말리면 효과가 더 좋아요.',
+   tags:['커플탕 추천','피부 미용 효과','약 30~40분']},
+  {time:'10:30',place:'야외 미네랄 온천·자쿠지',sub:'온천계란 간식 추천 · 30,000 VND',costType:'inc',hl:false,emoji:'♨',
+   img:I.onsen,desc:'입장권에 포함된 야외 온천과 자쿠지를 즐깁니다. 일본식 온천 방식으로 운영되며 수온이 다른 여러 탕이 있습니다. 온천 옆 가판대에서 파는 온천계란(삶은 달걀)이 별미예요.',
+   tags:['입장권 포함','온천계란 꼭!','다양한 수온']},
+  {time:'12:00',place:'공원 내 레스토랑 점심',sub:'뷔페 or 단품 · 약 300,000 VND (2인)',cost:'~16,500원',costType:'vnd',hl:false,emoji:'🍱',
+   img:I.dining,desc:'공원 내 레스토랑에서 점심을 해결합니다. 뷔페와 단품 메뉴 모두 있으며, 가격 대비 품질이 괜찮습니다. 오후 호이안 일정을 위해 식사 후 충분히 쉬고 출발하세요.',
+   tags:['뷔페 or 단품','공원 내 레스토랑']},
+  {time:'13:00',place:'호텔 복귀 · 샤워 · 낮잠',sub:'약 50분 이동 · 호이안은 저녁이 핵심!',costType:'inc',hl:false,emoji:'🏨',
+   img:I.hotel,desc:'호텔로 돌아와 샤워하고 낮잠으로 충전합니다. 호이안 올드타운은 저녁 랜턴이 켜지는 18시 이후가 가장 아름답기 때문에 서두를 필요 없어요.',
+   tags:['샤워 후 휴식','호이안은 저녁 출발']},
+  {time:'15:30',place:'호이안 출발',sub:'기사포함 차량 · 약 20분',cost:'포함',costType:'inc',hl:false,emoji:'🚗',
+   img:I.grab,desc:'기사포함 차량으로 호이안 올드타운까지 약 20분. 올드타운은 15:00~21:30 차량 진입이 불가하므로 외곽 주차장에 차를 세우고 도보로 탐방합니다.',
+   tags:['차량 진입 불가','도보 탐방']},
+  {time:'15:50',place:'호이안 올드타운 탐방',sub:'입장권 120,000 VND/인 · 유적 5곳 선택',cost:'~1.3만원/인',costType:'vnd',hl:false,emoji:'🏛',
+   img:I.hoian,desc:'UNESCO 세계문화유산으로 지정된 400년 역사의 고대 무역항 도시. 좁은 골목마다 알록달록한 랜턴이 걸려있어 걷기만 해도 사진이 예쁘게 나옵니다. 일본교, 복건 회관, 떤끼 고가를 돌아보세요.',
+   tags:['UNESCO 세계문화유산','일본교','복건 회관','랜턴 가득']},
+  {time:'17:00',place:'Thanh Cao Lau · 까오라우',sub:'메뉴 1개짜리 전문점 · 40,000 VND/인',cost:'~4,400원/인',costType:'vnd',hl:true,emoji:'🍜',
+   img:I.caolau,desc:'26 Thai Phien에 위치한 호이안 까오라우 전문점. 메뉴가 단 하나뿐이라 주문이 간단합니다. 쫄깃한 넓적면에 숙주, 바삭한 돼지껍데기를 올린 호이안 특산 국수. 매진되면 그날 장사를 마감하니 일찍 방문하는 것이 좋아요.',
+   tags:['메뉴 1개','매진 주의!','호이안 명물']},
+  {time:'17:30',place:'Banh Mi Phuong · 반미',sub:'앤서니 보르댕 극찬 · 30,000 VND/인',cost:'~3,300원/인',costType:'vnd',hl:false,emoji:'🥖',
+   img:I.banhmi,desc:'앤서니 보르댕이 CNN에서 "세계 최고의 샌드위치"라고 극찬한 반미 가게. Mix Banh Mi(미스 반미)를 추천합니다. 바삭하면서도 촉촉한 바게트 안에 각종 베트남 식재료가 가득. 줄이 길지만 회전율이 빨라요.',
+   tags:['앤서니 보르댕 극찬','Mix Banh Mi 추천','줄 서도 맛있음']},
+  {time:'18:00',place:'호아이 강변 · 일몰 감상',sub:'석양과 랜턴이 함께하는 마법 같은 시간',costType:'free',hl:false,emoji:'🌅',
+   img:I.sunset,desc:'Bach Dang 강변 거리에서 아름다운 일몰을 감상합니다. 해가 지면서 수많은 랜턴에 불이 들어오기 시작하는 이 시간이 호이안에서 가장 로맨틱한 순간이에요.',
+   tags:['무료','일몰 감상','랜턴 점등']},
+  {time:'18:30',place:'Morning Glory Original · 저녁',sub:'호이안 1위 · 화이트로즈+까오라우+완탕 · 한국어 메뉴',cost:'~2.2~3.3만원/인',costType:'vnd',hl:true,emoji:'🌹',
+   img:I.antoi,desc:'106 Nguyen Thai Hoc에 위치한 호이안 최인기 레스토랑. 화이트로즈(새우 딤섬), 까오라우, 완탕 튀김 등 호이안 명물 음식을 한 자리에서 맛볼 수 있습니다. 한국어 메뉴가 있어 주문이 편하고, 테라스 좌석에서 랜턴 거리가 보여요.',
+   tags:['한국어 메뉴','화이트로즈 필수','테라스 좌석']},
+  {time:'20:00',place:'랜턴 거리 야경 · 소원 등불',sub:'10,000 VND/개 · 호아이 강 소원 등불',cost:'~550원',costType:'vnd',hl:true,emoji:'🏮',
+   img:I.lantern,desc:'해가 완전히 지면 호이안이 랜턴의 도시로 변합니다. 형형색색의 랜턴 아래서 산책하고, 소원을 적은 종이배에 불을 붙여 강에 띄우는 체험을 해보세요. 2인이 함께 소원을 빌며 강에 떠내려가는 불빛을 보는 순간이 이번 여행의 하이라이트가 될 거예요.',
+   tags:['무료 산책','소원 등불 10,000VND','커플 필수 코스']},
+  {time:'20:40',place:'삼판 보트 유람',sub:'호아이 강 랜턴 반영 · 170,000~220,000 VND/척',cost:'~1~1.2만원',costType:'vnd',hl:false,emoji:'⛵',
+   img:I.hoian,desc:'강 위에서 보는 호이안의 야경은 또 다른 매력이 있습니다. 랜턴 빛이 수면에 반영되어 환상적인 분위기를 연출해요. 보트 1척에 2인이 탈 수 있으며 약 20~30분 유람합니다.',
+   tags:['커플 체험','20~30분 유람','랜턴 반영']},
+]);
+
+buildBud('bud2',[
+  ['기사포함 차량 종일','$50~80','~7~11.2만원'],
+  ['온천 입장+머드 (2인)','1,100,000~1,500,000 VND','~60,500~82,500원'],
+  ['공원 점심 (2인)','300,000~400,000 VND','~16,500~22,000원'],
+  ['호이안 입장+식사 (2인)','640,000~900,000 VND','~35,200~49,500원'],
+  ['등불+보트 (2인)','230,000~280,000 VND','~12,650~15,400원'],
+]);
+
+buildTL('tl3',[
+  {time:'07:30',place:'호텔 조식 · Dining M 뷔페',sub:'한식+베트남식+양식 3라인 · 06:30~10:30',costType:'inc',hl:false,emoji:'🍳',
+   img:I.hotel,desc:'Dining M 레스토랑에서 제공되는 뷔페 조식. 한식(불고기·된장찌개·김치), 베트남식(쌀국수·반쎄오), 양식(에그베네딕트·크루아상) 3가지 라인이 동시에 운영됩니다. 오늘은 시내에서 많이 걸어야 하니 든든하게 드세요.',
+   tags:['조식 포함','한식+베트남식+양식','06:30~10:30']},
+  {time:'09:30',place:'Grab으로 시내 이동',sub:'분짜까 109 방향 · 약 30분',cost:'~5,500원',costType:'vnd',hl:false,emoji:'🚕',
+   img:I.grab,desc:'Grab 앱으로 다낭 시내(Hai Chau 지구)로 이동합니다. 오늘 방문할 식당·카페·성당이 모두 이 지역에 몰려있어 한 번 이동하면 도보로 충분히 돌아볼 수 있어요.',
+   tags:['Grab 약 30분','시내 집결']},
+  {time:'10:00',place:'Bun Cha Ca 109 · 점심',sub:'2025 미슐랭 빕구르망 · 25,000~30,000 VND/인',cost:'~3,300원/인',costType:'vnd',hl:true,emoji:'🍜',
+   img:I.caolau,desc:'109 Nguyen Chi Thanh에 위치한 2025 미슐랭 빕구르망 레스토랑. 다낭 명물 어묵국수(분짜까)를 파는 곳으로, 토마토·타마린드 브로스에 어묵·호박·파인애플을 넣은 독특한 맛이 특징입니다. 현지인 단골이 가득한 소박한 식당이에요.',
+   tags:['2025 미슐랭','25,000~30,000VND','현지인 단골']},
+  {time:'10:50',place:'도보 5분 → Banh Mi Happy Bread',sub:'한강 근처 · 다낭 1위 반미',costType:'free',hl:false,emoji:'🚶',
+   img:null,desc:'분짜까 109에서 도보 5분이면 Happy Bread에 도착합니다.',tags:['도보 5분']},
+  {time:'11:00',place:'Banh Mi Happy Bread · 간식',sub:'10 Hung Vuong · 바삭한 바게트+베이컨+에그 · 한국어 메뉴',cost:'~2,750원/인',costType:'vnd',hl:false,emoji:'🥖',
+   img:I.banhmi,desc:'한시장 맞은편에 위치한 다낭 최고 인기 반미 가게. 바게트가 바삭하면서도 안은 촉촉하고, 베이컨·에그·각종 소스가 듬뿍 들어갑니다. 에어컨이 있는 실내 매장이라 더위를 잠깐 피하기도 좋아요. 한국어 메뉴판 있음.',
+   tags:['한국어 메뉴','바삭한 바게트','에어컨 실내','다낭 1위']},
+  {time:'11:35',place:'다낭 대성당 · 핑크성당',sub:'156 Tran Phu · 1923년 프랑스 건축',costType:'free',hl:false,emoji:'⛪',
+   img:I.church,desc:'1923년 프랑스 식민지 시대에 건축된 고딕 양식 성당. 파스텔 핑크색 외관이 너무 예뻐서 \'핑크성당\'이라는 별명이 붙었습니다. 첨탑 꼭대기의 수탉 모양 풍향계도 특징이에요. 반미 가게에서 도보 5분.',
+   tags:['무료','포토 명소','1923년 건축','도보 5분']},
+  {time:'11:50',place:'콩카페 · 한강변 카페',sub:'98 Bach Dang · 군사 빈티지 인테리어',cost:'~3,850원/인',costType:'vnd',hl:true,emoji:'☕',
+   img:I.cafe,desc:'한강 바로 앞에 위치한 체인 카페로, 베트남 통일 시대 군사 빈티지 컨셉의 독특한 인테리어가 특징입니다. 강바람을 맞으며 테라스에 앉아 마시는 코코넛 스무디 커피가 시그니처. 달콤하고 진한 코코넛 향이 베트남 커피와 환상적으로 어울려요.',
+   tags:['코코넛 스무디 커피 필수!','한강 테라스','군사 빈티지','35,000~55,000VND']},
+  {time:'14:00',place:'롯데마트',sub:'5층 대형마트 · 크록스 정품(4층) · 귀국선물(2층)',cost:'예산 자유',costType:'',hl:true,emoji:'🛒',
+   img:I.lotte,desc:'다낭 최대 규모의 한국계 대형마트. 총 5층으로 구성되어 있으며 2층에서 G7 커피믹스·포·과자·라면·소스 등 귀국 선물용 식품을 구입할 수 있습니다. 4층에는 크록스 정품 매장이 있어요(M11까지). 입구의 안면인식 짐 보관함에 쇼핑백을 맡기면 편리합니다.',
+   tags:['07:30~22:00','2층: 귀국선물','4층: 크록스 정품','짐 보관함']},
+  {time:'16:30',place:'Grab으로 반쎄오 바즈엉 이동',sub:'약 15분',cost:'~3,300원',costType:'vnd',hl:false,emoji:'🚕',
+   img:I.grab,desc:'롯데마트에서 Grab으로 약 15분 이동합니다. 280/23 Hoang Dieu에 위치한 식당은 큰 길에 간판이 있고 골목 안쪽으로 들어가야 해요.',
+   tags:['약 15분','골목 안쪽 위치']},
+  {time:'17:00',place:'Banh Xeo Ba Duong · 저녁',sub:'미슐랭 셀렉티드 2025 · 50,000~80,000 VND/인',cost:'~5,500~8,800원/인',costType:'vnd',hl:true,emoji:'🥘',
+   img:I.banhxeo,desc:'다낭 전설의 반쎄오(베트남 팬케이크) 전문점. 2025년 미슐랭 셀렉티드에 선정된 맛집으로, 거대한 크기의 바삭한 황금색 팬케이크 안에 새우·숙주·콩나물이 가득 들어있습니다. 라이스페이퍼에 싸서 야채와 함께 소스에 찍어 먹는 방식. 현지인이 가득하고 가격도 저렴해요.',
+   tags:['미슐랭 셀렉티드 2025','골목 안쪽','바삭한 팬케이크','현지인 맛집']},
+]);
+
+buildBud('bud3',[
+  ['Grab 이동 합계','430,000 VND','~23,650원'],
+  ['점심+간식 (2인)','130,000~160,000 VND','~7,150~8,800원'],
+  ['콩카페 (2인)','70,000~110,000 VND','~3,850~6,050원'],
+  ['롯데마트 쇼핑','300,000~600,000 VND','~16,500~33,000원'],
+  ['반쎄오 저녁 (2인)','100,000~160,000 VND','~5,500~8,800원'],
+]);
+
+buildTL('tl4',[
+  {time:'07:00',place:'프라이빗 비치 · 이른 아침',sub:'하미 비치 전용 선베드 · 해수온 29°C',costType:'free',hl:false,emoji:'🌊',
+   img:I.beach,desc:'아직 사람이 없는 이른 아침, 신라모노그램 전용 프라이빗 비치의 선베드에 누워 조용히 바다를 감상합니다. 해수온이 29°C라 상쾌하게 물에 들어갈 수도 있어요. 일출 방향이 바다와 맞닿아 있어 오션뷰가 탁월합니다.',
+   tags:['무료','전용 선베드','해수온 29°C','일출 감상']},
+  {time:'08:30',place:'Dining M 조식 뷔페',sub:'한식+베트남식+양식 · 느긋하게 1시간 30분',costType:'inc',hl:true,emoji:'🍳',
+   img:I.dining,desc:'오늘은 서두를 필요 없는 날! Dining M 뷔페를 1시간 30분 여유롭게 즐기세요. 특히 베트남 현지 과일 코너와 베이커리 섹션이 인기. 따뜻한 쌀국수부터 에그베네딕트까지 골고루 즐겨보세요.',
+   tags:['조식 포함','느긋하게 1.5시간','열대과일 코너']},
+  {time:'10:00',place:'인피니티 풀 · 어덜트 풀',sub:'풀사이드 선베드 · 오션뷰 인피니티 풀',costType:'free',hl:false,emoji:'🏊',
+   img:I.pool,desc:'신라모노그램의 4개 수영장 중 어덜트 풀(성인 전용)을 추천합니다. 조용하고 뷰가 가장 아름다워요. 인피니티 풀에 몸을 담그면 수평선이 풀과 하나로 이어지는 착시 효과가 멋집니다. 풀사이드 선베드에 누워 Pool Bar의 칵테일도 즐겨보세요.',
+   tags:['무료','어덜트 풀 추천','인피니티 뷰','Pool Bar 칵테일']},
+  {time:'12:00',place:'Bistro M · 비치 레스토랑 점심',sub:'바다 보며 식사 · 파스타+시푸드+베트남식',cost:'~2.7만원/인',costType:'vnd',hl:false,emoji:'🍝',
+   img:I.dining,desc:'해변 바로 앞에 위치한 비치 레스토랑 Bistro M. 파도 소리를 들으며 테라스 좌석에서 식사하는 경험이 특별합니다. 시푸드 파스타, 베트남 쌀국수, 피자 등 다양한 메뉴가 있어요.',
+   tags:['비치 테라스 좌석','시푸드 파스타','~350,000~600,000VND (2인)']},
+  {time:'13:30',place:'설화수 스파 · 커플 트리트먼트',sub:'09:00~22:00 · 90분 바디 마사지 · 커플룸 예약',cost:'~11~22만원 (2인)',costType:'vnd',hl:true,emoji:'💆',
+   img:I.spa,desc:'한국 최고급 한방 코스메틱 브랜드 설화수가 운영하는 리조트 전용 스파. 전통 한방 오일을 이용한 바디 마사지와 설화수 제품을 활용한 페이셜 트리트먼트를 받을 수 있습니다. 체크인 당일 바로 예약하는 것이 핵심! 커플 트리트먼트룸에서 2인이 동시에 케어를 받는 경험은 특별한 추억이 됩니다.',
+   tags:['체크인 당일 예약!','커플룸 동시 트리트먼트','설화수 제품 사용','★매우 만족 후기 많음']},
+  {time:'16:00',place:'Therapy Garden · 야외 자쿠지',sub:'스파 후 바로 이용 · 최고의 조합',costType:'free',hl:false,emoji:'♨',
+   img:I.pool,desc:'스파를 마치고 바로 연결된 Therapy Garden의 야외 온수 자쿠지를 이용합니다. 마사지의 여운을 느끼며 따뜻한 온수에 몸을 담그면 최고의 힐링이 완성돼요.',
+   tags:['무료','스파 후 최적','야외 자쿠지']},
+  {time:'17:00',place:'프라이빗 비치 · 일몰 산책',sub:'약 18:30 황금빛 석양',costType:'free',hl:false,emoji:'🌅',
+   img:I.sunset,desc:'7월 다낭의 일몰은 약 18시 30분. 비치를 따라 산책하며 황금빛으로 물드는 바다를 감상하세요. 선베드에 나란히 누워 바라보는 일몰이 이번 여행에서 가장 로맨틱한 순간 중 하나가 될 거예요.',
+   tags:['무료','약 18:30 일몰','커플 산책']},
+  {time:'18:30',place:'Bar M · 망고 빙수',sub:'리조트 시그니처 디저트 · 칵테일+목테일',cost:'~5.5~8.8만원 (2인)',costType:'vnd',hl:true,emoji:'🍧',
+   img:I.dining,desc:'신라모노그램의 시그니처 디저트인 망고 빙수(Mango Bingsu). 한국식 빙수를 베트남 신선한 망고와 결합한 메뉴로, 모든 후기에서 극찬을 받고 있습니다. 달콤한 빙수를 먹으며 로비 바의 칵테일도 함께 즐겨보세요.',
+   tags:['망고 빙수 시그니처!','모든 후기 극찬','칵테일 페어링']},
+  {time:'19:30',place:'Dining M · 파인다이닝 저녁',sub:'불고기+냉면+베트남 씨푸드 · 라이브 뮤직',cost:'~4.4~5.5만원/인',costType:'vnd',hl:false,emoji:'🍽',
+   img:I.dining,desc:'저녁에는 Dining M이 파인다이닝 모드로 운영됩니다. 한식(불고기·냉면)과 베트남 씨푸드를 함께 즐길 수 있어요. 요일에 따라 라이브 뮤직 공연이 있으니 프런트에 문의해보세요.',
+   tags:['한식+베트남식','라이브 뮤직 있는 날도','파인다이닝 분위기']},
+  {time:'21:00',place:'Pool Bar · 나이트캡',sub:'야간 조명 인피니티 풀 뷰 · 칵테일 1잔',cost:'~8,250원/인',costType:'vnd',hl:false,emoji:'🍹',
+   img:I.pool,desc:'낮과는 전혀 다른 분위기의 야간 풀사이드. 조명이 켜진 인피니티 풀 옆에서 칵테일 한 잔을 마시며 하루를 마무리합니다. 여행의 피로가 사르르 녹아내리는 완벽한 마무리예요.',
+   tags:['야간 인피니티 풀','칵테일 마무리','로맨틱']},
+]);
+
+buildBud('bud4',[
+  ['조식 (2인)','무료','포함'],
+  ['Bistro M 점심 (2인)','350,000~600,000 VND','~19,250~33,000원'],
+  ['설화수 스파 (2인)','2,000,000~4,000,000 VND','~11~22만원'],
+  ['Bar M + 저녁 + 풀바 (2인)','1,000,000~1,500,000 VND','~55,000~82,500원'],
+]);
+
+buildTL('tl5',[
+  {time:'07:30',place:'마지막 조식 · 비치 산책',sub:'Dining M 뷔페 + 이른 아침 바다',costType:'inc',hl:false,emoji:'🌊',
+   img:I.beach,desc:'체크아웃 전 마지막으로 호텔 시설을 만끽합니다. 조식 후 비치를 산책하며 이번 여행의 마지막 바다 공기를 깊이 마셔두세요.',
+   tags:['조식 포함','마지막 비치 산책']},
+  {time:'11:00',place:'체크아웃 · 짐 보관',sub:'프런트에 짐 무료 보관 요청',costType:'free',hl:false,emoji:'🏨',
+   img:I.hotel,desc:'체크아웃(12:00 이전) 후 짐은 호텔 프런트에 무료로 맡길 수 있습니다. 가볍게 시내로 나가 오후를 즐기다가 공항 출발 전 짐을 찾으러 오세요.',
+   tags:['12:00 이전 체크아웃','짐 무료 보관','가벼운 시내 투어']},
+  {time:'11:30',place:'Grab으로 시내 이동',sub:'분짜까 109 방향 · 약 30분',cost:'~5,500원',costType:'vnd',hl:false,emoji:'🚕',
+   img:I.grab,desc:'시내로 이동해 다낭 마지막 맛집 투어를 시작합니다.',tags:['Grab 약 30분']},
+  {time:'12:00',place:'Bun Cha Ca 109 · 점심',sub:'2025 미슐랭 빕구르망 · 25,000~30,000 VND/인',cost:'~3,300원/인',costType:'vnd',hl:true,emoji:'🍜',
+   img:I.caolau,desc:'다낭에서의 마지막 점심은 미슐랭 빕구르망 분짜까 109에서! 토마토·파인애플 육수에 다양한 어묵과 채소가 들어간 다낭 명물 국수를 마지막으로 즐기세요. 귀국 후에도 그 맛이 생각날 거예요.',
+   tags:['2025 미슐랭','25,000~30,000VND','마지막 점심']},
+  {time:'13:00',place:'Banh Xeo Ba Duong · 반쎄오',sub:'미슐랭 셀렉티드 2025 · 50,000~80,000 VND/인',cost:'~5,500~8,800원/인',costType:'vnd',hl:false,emoji:'🥘',
+   img:I.banhxeo,desc:'귀국 전 마지막으로 반쎄오도 한 번 더! 미슐랭 셀렉티드 바삭한 황금 팬케이크를 야채와 함께 싸먹으며 베트남 음식의 마지막 여운을 즐기세요.',
+   tags:['미슐랭 셀렉티드','골목 안쪽']},
+  {time:'13:45',place:'Banh Mi Happy Bread · 마지막 반미',sub:'25,000~50,000 VND · 한국어 메뉴',cost:'~2,750원/인',costType:'vnd',hl:false,emoji:'🥖',
+   img:I.banhmi,desc:'베트남 반미로 마무리하는 스트리트 푸드 투어. 공항에서 먹을 간식용으로 하나 더 포장해도 좋아요.',
+   tags:['한국어 메뉴','포장도 가능']},
+  {time:'14:30',place:'꼰시장 · 마지막 쇼핑',sub:'2,000개 노점 · 기념품 · 현금 필요',cost:'~5.5만원~',costType:'vnd',hl:false,emoji:'🛍',
+   img:I.hanmkt,desc:'한시장보다 로컬 분위기가 강한 꼰시장에서 마지막 기념품 쇼핑을 합니다. 피쉬소스, 건어물, 베트남 커피, 아오자이 등 실용적인 선물을 구입하기 좋아요.',
+   tags:['현금 필요','한시장보다 로컬','기념품 쇼핑']},
+  {time:'17:30',place:'씨푸드 저녁 · 마지막 만찬',sub:'Be Man Seafood or Moc Seafood · 라이브 수족관',cost:'~2.2~4.4만원/인',costType:'vnd',hl:true,emoji:'🦐',
+   img:I.seafood,desc:'베트남 마지막 저녁은 씨푸드로! Moc Seafood(26 To Hien Thanh)는 구글 ★4.7의 다낭 최고 씨푸드 식당. 입구 수족관에서 직접 재료를 골라 원하는 방식으로 조리해줍니다. 새우구이, 랍스터 갈릭버터, 조개찜이 인기. 인기가 많으니 예약 강력 권장.',
+   tags:['예약 강력 권장','수족관 선택 씨푸드','새우+랍스터+조개']},
+  {time:'19:00',place:'호텔 복귀 · 짐 수령',sub:'프런트에 맡긴 짐 찾기',cost:'~5,500원',costType:'vnd',hl:false,emoji:'🧳',
+   img:I.hotel,desc:'Grab으로 호텔에 들러 맡겨둔 짐을 찾고 공항으로 출발 준비를 합니다.',tags:['짐 수령']},
+  {time:'20:00',place:'다낭 국제공항 T2',sub:'출발 3시간 전 도착 필수! · 체크인+출국심사',cost:'~6,600원',costType:'vnd',hl:true,emoji:'✈',
+   img:I.airport,desc:'다낭 국제공항 T2(국제선 터미널)에 도착합니다. 23:30 출발이므로 20:30까지는 도착하는 것을 권장합니다. 체크인 후 출국심사를 마치면 면세점에서 남은 VND를 소진하세요. 재환전이 어려우므로 면세점에서 모두 쓰는 것이 좋아요.',
+   tags:['T2 국제선','3시간 전 도착','남은 VND 면세점 소진!']},
+  {time:'23:30',place:'VN430 · 귀국 출발',sub:'인천 도착 07/22(수) 06:00',costType:'inc',hl:true,emoji:'🛫',
+   img:I.airport,desc:'베트남항공 VN430편으로 인천국제공항 T1으로 귀국합니다. 비행시간 약 4시간 30분. 7월 22일 오전 6시에 인천에 도착합니다. 좋은 추억 가득한 다낭 여행의 완벽한 마무리입니다!',
+   tags:['VN430','인천 T1 도착 06:00','4시간 30분']},
+]);
+
+buildBud('bud5',[
+  ['Grab 이동 합계','420,000 VND','~23,100원'],
+  ['맛집 3곳 (2인)','250,000~500,000 VND','~13,750~27,500원'],
+  ['카페+간식 (2인)','100,000~200,000 VND','~5,500~11,000원'],
+  ['씨푸드 저녁 (2인)','400,000~800,000 VND','~22,000~44,000원'],
+  ['기념품+면세점','200,000~500,000 VND','~11,000~27,500원'],
+]);
+
+// ── MAPS ──────────────────────────────────────────────────────
+const TILE='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+const ATTR='© <a href="https://openstreetmap.org">OpenStreetMap</a>';
+const maps={};
+
+function mkIcon(col,num){
+  return L.divIcon({
+    html:`<div style="background:${col};color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;font-family:sans-serif;border:2.5px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.25)">${num}</div>`,
+    className:'',iconSize:[28,28],iconAnchor:[14,14]
+  });
+}
+
+function initMap(id){
+  if(maps[id]){maps[id].invalidateSize();return;}
+  const opt={zoomControl:false};
+  if(id==='day1'){
+    const pts=[[16.057,108.2025,'공항','#e65100',1],[15.9628,108.2889,'신라모노그램','#007d7a',2],[16.0681,108.2241,'한시장','#e65100',3],[16.065,108.222,'Jang Mi Spa','#c62828',4],[16.0682,108.2248,'An Thoi','#1565c0',5]];
+    const m=L.map('map1',opt).setView([16.02,108.25],11);
+    L.tileLayer(TILE,{attribution:ATTR}).addTo(m);
+    pts.forEach(p=>L.marker([p[0],p[1]],{icon:mkIcon(p[3],p[4])}).bindPopup(`<b>${p[2]}</b>`).addTo(m));
+    L.polyline(pts.map(p=>[p[0],p[1]]),{color:'#00897b',weight:2.5,dashArray:'8,6',opacity:0.7}).addTo(m);
+    L.control.zoom({position:'bottomright'}).addTo(m); maps['day1']=m;
+  } else if(id==='day2'){
+    const pts=[[15.9628,108.2889,'호텔','#007d7a',1],[15.9679,108.0198,'누이딴따이 온천','#c62828',2],[15.9628,108.2889,'호텔','#007d7a',3],[15.8768,108.3262,'호이안','#e65100',4]];
+    const m=L.map('map2',opt).setView([15.93,108.19],10);
+    L.tileLayer(TILE,{attribution:ATTR}).addTo(m);
+    pts.forEach(p=>L.marker([p[0],p[1]],{icon:mkIcon(p[3],p[4])}).bindPopup(`<b>${p[2]}</b>`).addTo(m));
+    L.polyline(pts.map(p=>[p[0],p[1]]),{color:'#c05a20',weight:2.5,dashArray:'8,6',opacity:0.7}).addTo(m);
+    L.control.zoom({position:'bottomright'}).addTo(m); maps['day2']=m;
+  } else if(id==='day3'){
+    const pts=[[15.9628,108.2889,'호텔','#007d7a',1],[16.0744,108.2208,'분짜까 109','#e65100',2],[16.0687,108.2247,'반미 Happy','#c62828',3],[16.067,108.2232,'핑크성당','#1565c0',4],[16.069,108.2249,'콩카페','#ab47bc',5],[16.0348,108.2293,'롯데마트','#ab47bc',6],[16.0589,108.2162,'반쎄오 바즈엉','#c62828',7]];
+    const m=L.map('map3',opt).setView([16.02,108.24],11);
+    L.tileLayer(TILE,{attribution:ATTR}).addTo(m);
+    pts.forEach(p=>L.marker([p[0],p[1]],{icon:mkIcon(p[3],p[4])}).bindPopup(`<b>${p[2]}</b>`).addTo(m));
+    L.polyline(pts.map(p=>[p[0],p[1]]),{color:'#00897b',weight:2.5,dashArray:'8,6',opacity:0.7}).addTo(m);
+    L.control.zoom({position:'bottomright'}).addTo(m); maps['day3']=m;
+  } else if(id==='day4'){
+    const m=L.map('map4',opt).setView([15.9628,108.2889],14);
+    L.tileLayer(TILE,{attribution:ATTR}).addTo(m);
+    L.marker([15.9628,108.2889],{icon:mkIcon('#2a7a4a','★')}).bindPopup('<b>Shilla Monogram Danang</b>').addTo(m);
+    L.circle([15.9628,108.2889],{radius:400,color:'#2a7a4a',fillColor:'#2a7a4a',fillOpacity:0.08,weight:1.5}).addTo(m);
+    L.control.zoom({position:'bottomright'}).addTo(m); maps['day4']=m;
+  } else if(id==='day5'){
+    const pts=[[15.9628,108.2889,'호텔','#6040a0',1],[16.0744,108.2208,'분짜까 109','#e65100',2],[16.0589,108.2162,'반쎄오 바즈엉','#e65100',3],[16.0348,108.2293,'꼰시장','#6040a0',4],[16.057,108.2025,'공항','#c62828',5]];
+    const m=L.map('map5',opt).setView([16.02,108.23],11);
+    L.tileLayer(TILE,{attribution:ATTR}).addTo(m);
+    pts.forEach(p=>L.marker([p[0],p[1]],{icon:mkIcon(p[3],p[4])}).bindPopup(`<b>${p[2]}</b>`).addTo(m));
+    L.polyline(pts.map(p=>[p[0],p[1]]),{color:'#6040a0',weight:2.5,dashArray:'8,6',opacity:0.7}).addTo(m);
+    L.control.zoom({position:'bottomright'}).addTo(m); maps['day5']=m;
+  }
+}
+</script>
+</body>
+</html>
