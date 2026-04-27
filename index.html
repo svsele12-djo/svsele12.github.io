@@ -279,6 +279,37 @@ section.active{display:block;}
 .tip-box{background:var(--gold-l);border:1px solid #e8d0a0;border-left:3px solid var(--gold);border-radius:8px;padding:13px 14px;font-size:12.5px;color:var(--text2);line-height:1.6;}
 .tip-box strong{color:var(--gold);}
 
+
+/* ── 민감정보 블러 마스크 ─────────────────── */
+.secret{
+  position:relative; display:inline-block;
+  cursor:pointer; user-select:none;
+  -webkit-user-select:none;
+}
+.secret .s-val{
+  filter:blur(5px);
+  transition:filter 0.3s ease;
+  pointer-events:none;
+}
+.secret.revealed .s-val{
+  filter:blur(0);
+}
+.secret .s-badge{
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:10px; font-weight:700;
+  color:#fff; letter-spacing:0.5px;
+  background:rgba(0,128,125,0.72);
+  border-radius:4px;
+  transition:opacity 0.25s;
+  pointer-events:none;
+}
+.secret.revealed .s-badge{opacity:0;}
+/* 칩 안에서 세로 정렬 */
+.chip .secret{display:flex;align-items:center;}
+/* 패널 행 안에서 */
+.pr .secret, .ii .secret{display:inline-flex;align-items:center;}
+
 /* 스크롤바 */
 ::-webkit-scrollbar{width:4px;height:4px;}
 ::-webkit-scrollbar-track{background:transparent;}
@@ -351,8 +382,8 @@ section.active{display:block;}
       <div class="chip"><span class="cl">항공편</span><span class="cv">베트남항공 VN431/430</span></div>
       <div class="chip"><span class="cl">숙소</span><span class="cv">Shilla Monogram Danang</span></div>
       <div class="chip"><span class="cl">여행자</span><span class="cv">CHOI SEOYOON &amp; OH DONGJUN</span></div>
-      <div class="chip"><span class="cl">예약번호</span><span class="cv">1400825104133466</span></div>
-      <div class="chip"><span class="cl">PNR</span><span class="cv" style="color:var(--teal);font-weight:700">CACZTD</span></div>
+      <div class="chip"><span class="cl">예약번호</span><span class="cv"><span class="secret" onclick="toggleSecret(this)" title="탭하면 표시됩니다"><span class="s-val">1400825104133466</span><span class="s-badge">🔒 탭하면 표시</span></span></span></div>
+      <div class="chip"><span class="cl">PNR</span><span class="cv" style="color:var(--teal);font-weight:700"><span class="secret" onclick="toggleSecret(this)" title="탭하면 표시됩니다"><span class="s-val" style="color:var(--teal)">CACZTD</span><span class="s-badge">🔒 탭하면 표시</span></span></span></div>
     </div>
     <div class="day-cards">
       <div class="dc" onclick="showTab('day1')" style="border-top-color:var(--day1)">
@@ -400,7 +431,7 @@ section.active{display:block;}
           <div class="pr"><span class="k">편명</span><span class="v">베트남항공 VN431</span></div>
           <div class="pr"><span class="k">귀국</span><span class="v">2026.07.21(화) 23:30  다낭 T2 → 인천 T1  07/22 06:00</span></div>
           <div class="pr"><span class="k">편명</span><span class="v">베트남항공 VN430</span></div>
-          <div class="pr"><span class="k">PNR</span><span class="v" style="color:var(--teal);font-weight:700">CACZTD</span></div>
+          <div class="pr"><span class="k">PNR</span><span class="v" style="color:var(--teal);font-weight:700"><span class="secret" onclick="toggleSecret(this)"><span class="s-val" style="color:var(--teal)">CACZTD</span><span class="s-badge">🔒 탭</span></span></span></div>
           <div class="pr"><span class="k">수하물</span><span class="v">위탁 23kg / 기내+개인 10kg (인당)</span></div>
         </div>
       </div>
@@ -671,7 +702,7 @@ section.active{display:block;}
         <div class="ii"><span class="ik">출발</span><span class="iv" style="color:var(--accent);font-weight:600">23:30  다낭 T2 국제선</span></div>
         <div class="ii"><span class="ik">도착권장</span><span class="iv">20:30 (3시간 전)</span></div>
         <div class="ii"><span class="ik">수하물</span><span class="iv">위탁 23kg / 기내+개인 10kg</span></div>
-        <div class="ii"><span class="ik">PNR</span><span class="iv" style="color:var(--teal);font-weight:700">CACZTD</span></div>
+        <div class="ii"><span class="ik">PNR</span><span class="iv" style="color:var(--teal);font-weight:700"><span class="secret" onclick="toggleSecret(this)"><span class="s-val" style="color:var(--teal)">CACZTD</span><span class="s-badge">🔒 탭</span></span></span></div>
         <div class="ii"><span class="ik">보조배터리</span><span class="iv">기내 반입 (위탁 불가!)</span></div>
         <div class="ii"><span class="ik">VND</span><span class="iv">남은 돈 면세점에서 소진!</span></div>
       </div>
@@ -681,6 +712,19 @@ section.active{display:block;}
 </section>
 
 <script>
+
+// ── 민감정보 토글 ─────────────────────────────
+function toggleSecret(el){
+  el.classList.toggle('revealed');
+  // 3초 후 자동으로 다시 가리기
+  if(el.classList.contains('revealed')){
+    clearTimeout(el._hideTimer);
+    el._hideTimer = setTimeout(()=>{
+      el.classList.remove('revealed');
+    }, 5000);
+  }
+}
+
 // ── TAB ────────────────────────────────────────────────────────
 const tabs=['main','day1','day2','day3','day4','day5'];
 const tabColors={main:'var(--teal)',day1:'var(--day1)',day2:'var(--day2)',day3:'var(--day3)',day4:'var(--day4)',day5:'var(--day5)'};
