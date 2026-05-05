@@ -443,7 +443,36 @@ section.active{display:block;}
           <div class="pr"><span class="k">체크인</span><span class="v">2026.07.17  15:00~</span></div>
           <div class="pr"><span class="k">체크아웃</span><span class="v">2026.07.21  ~12:00 (4박)</span></div>
           <div class="pr"><span class="k">조식</span><span class="v">매일 2인 포함 (18일~21일)</span></div>
-          <div class="pr"><span class="k">보증금</span><span class="v">VND 2,000,000/일  체크인 시 현장결제</span></div>
+          <div class="pr"><span class="k">보증금</span><span class="v">VND 2,000,000/일 · 체크인 시 현장결제</span></div>
+          <div style="margin:10px 0 4px;background:linear-gradient(135deg,#e8f4f4,#f5f0e8);border:1px solid #c5dada;border-radius:10px;padding:12px 14px;">
+            <div style="font-size:11px;font-weight:700;color:var(--teal);margin-bottom:8px;letter-spacing:0.5px;">💰 보증금 계산 (4박 기준)</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
+              <div style="background:#fff;border-radius:8px;padding:8px 10px;border:1px solid #d0e8e8;text-align:center;">
+                <div style="font-size:10px;color:#888;margin-bottom:3px;">🇻🇳 베트남 동 (VND)</div>
+                <div style="font-size:15px;font-weight:700;color:#1a6b6b;">8,000,000<span style="font-size:11px;font-weight:400;"> 동</span></div>
+                <div style="font-size:10px;color:#aaa;margin-top:2px;">2,000,000 × 4박</div>
+              </div>
+              <div style="background:#fff;border-radius:8px;padding:8px 10px;border:1px solid #d0e8e8;text-align:center;">
+                <div style="font-size:10px;color:#888;margin-bottom:3px;">🇺🇸 미국 달러 (USD)</div>
+                <div style="font-size:15px;font-weight:700;color:#1a6b6b;">≈ $<span id="dep-usd">—</span></div>
+                <div style="font-size:10px;color:#aaa;margin-top:2px;">1 USD ≈ <span id="usd-vnd-rate">—</span> VND</div>
+              </div>
+            </div>
+            <div style="background:#fff3e0;border-radius:8px;padding:8px 12px;border:1px solid #ffe0b2;">
+              <div style="font-size:10px;color:#888;margin-bottom:4px;">📈 USD → KRW 실시간 환율</div>
+              <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;">
+                <div>
+                  <span style="font-size:13px;font-weight:700;color:#e65100;">$<span id="dep-usd2">—</span></span>
+                  <span style="font-size:11px;color:#999;"> = </span>
+                  <span style="font-size:15px;font-weight:700;color:#bf360c;" id="dep-krw">— 원</span>
+                </div>
+                <div style="text-align:right;">
+                  <div style="font-size:10px;color:#999;">1 USD = <span id="usd-krw-rate">—</span>원</div>
+                  <div style="font-size:9px;color:#bbb;" id="rate-time">환율 불러오는 중...</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -735,6 +764,38 @@ function toggleSecret(el){
     }, 5000);
   }
 }
+
+
+// ── 보증금 실시간 환율 ─────────────────────────────
+async function fetchDepositRate() {
+  try {
+    const res = await fetch('https://api.exchangerate-api.com/v4/latest/USD');
+    const data = await res.json();
+    const usdToVnd = data.rates['VND'];
+    const usdToKrw = data.rates['KRW'];
+    if (!usdToVnd || !usdToKrw) return;
+
+    const vndTotal = 8000000;
+    const usdAmt = (vndTotal / usdToVnd).toFixed(0);
+    const krwAmt = Math.round(usdAmt * usdToKrw);
+
+    const fmt = (n) => n.toLocaleString('ko-KR');
+
+    document.querySelectorAll('#dep-usd').forEach(el => el.textContent = fmt(parseInt(usdAmt)));
+    document.querySelectorAll('#dep-usd2').forEach(el => el.textContent = fmt(parseInt(usdAmt)));
+    document.querySelectorAll('#dep-krw').forEach(el => el.textContent = fmt(krwAmt) + ' 원');
+    document.querySelectorAll('#usd-vnd-rate').forEach(el => el.textContent = fmt(Math.round(usdToVnd)));
+    document.querySelectorAll('#usd-krw-rate').forEach(el => el.textContent = fmt(Math.round(usdToKrw)));
+
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('ko-KR', {hour:'2-digit', minute:'2-digit'});
+    document.querySelectorAll('#rate-time').forEach(el => el.textContent = '기준: ' + timeStr + ' 업데이트');
+  } catch(e) {
+    document.querySelectorAll('#rate-time').forEach(el => el.textContent = '환율 로드 실패 (인터넷 확인)');
+  }
+}
+fetchDepositRate();
+setInterval(fetchDepositRate, 300000); // 5분마다 갱신
 
 // ── TAB ────────────────────────────────────────────────────────
 const tabs=['main','day1','day2','day3','day4','day5'];
