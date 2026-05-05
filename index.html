@@ -492,6 +492,7 @@ section.active{display:block;}
           <div class="leg-i"><div class="leg-d" style="background:var(--teal)"></div>호텔→한시장</div>
           <div class="leg-i"><div class="leg-d" style="background:#c62828"></div>한시장→온다스파 (도보 2분)</div>
           <div class="leg-i"><div class="leg-d" style="background:#1565c0"></div>스파→An Thoi (도보 3분)</div>
+          <div class="leg-i"><div class="leg-d" style="background:#6a1b9a"></div>멜리어 럭셔리 (한시장 옆)</div>
         </div>
       </div>
       <div class="sec-label">시간별 일정 <span class="hint">▼ 클릭하면 상세정보</span></div>
@@ -1106,7 +1107,7 @@ function initMap(id){
   if(maps[id]){maps[id].invalidateSize();return;}
   const opt={zoomControl:false};
   if(id==='day1'){
-    const pts=[[16.057,108.2025,'공항','#e65100',1],[15.9628,108.2889,'신라모노그램','#007d7a',2],[16.0681,108.2241,'한시장','#e65100',3],[16.0672,108.2248,'온다스파','#c62828',4],[16.0682,108.2248,'An Thoi','#1565c0',5]];
+    const pts=[[16.057,108.2025,'공항','#e65100',1],[15.9628,108.2889,'신라모노그램','#007d7a',2],[16.0681,108.2241,'한시장','#e65100',3],[16.0672,108.2248,'온다스파','#c62828',4],[16.0682,108.2248,'An Thoi','#1565c0',5],[16.0676,108.2229,'멜리어 럭셔리','#6a1b9a',6]];
     const m=L.map('map1',opt).setView([16.02,108.25],11);
     L.tileLayer(TILE,{attribution:ATTR}).addTo(m);
     pts.forEach(p=>L.marker([p[0],p[1]],{icon:mkIcon(p[3],p[4])}).bindPopup(`<b>${p[2]}</b>`).addTo(m));
