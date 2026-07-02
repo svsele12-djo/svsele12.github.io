@@ -404,7 +404,7 @@ section.active{display:block;}
         <div class="dnum" style="color:var(--day1)">1</div>
         <div class="ddate">7/17 (금)</div>
         <div class="dtheme">공항 도착 · 한시장 쇼핑 · 마사지 90분 · 저녁</div>
-        <div class="dbudget" style="color:var(--day1)">약 12~15만원</div>
+        <div class="dbudget" style="color:var(--day1)">약 14~17만원</div>
       </div>
       <div class="dc" onclick="showTab('day2')" style="border-top-color:var(--day2)">
         <div class="dnum" style="color:var(--day2)">2</div>
@@ -434,8 +434,8 @@ section.active{display:block;}
   </div>
 
   <div class="ov-wrap">
-    <div class="ov-title">여행 상세 정보</div>
-    <div class="ov-sub">항공 · 호텔 · 실용 정보 한눈에 보기</div>
+    <div class="ov-title">✈ 항공 및 교통</div>
+    <div class="ov-sub">항공편 · 공항 픽업/샌딩 정보</div>
 
     <div class="ov-grid-2">
       <div class="panel">
@@ -449,6 +449,22 @@ section.active{display:block;}
           <div class="pr"><span class="k">수하물</span><span class="v">위탁 23kg / 기내+개인 10kg (인당)</span></div>
         </div>
       </div>
+      <div class="panel">
+        <div class="panel-hdr" style="color:#e65100">🚐 공항 픽업 · 샌딩 (예약금 입금완료)</div>
+        <div class="panel-body">
+          <div class="pr"><span class="k">픽업 (7/17)</span><span class="v">공항(VN431) → 신라모노그램 · 7인승</span></div>
+          <div class="pr"><span class="k">픽업 요금</span><span class="v">현장 $15 + 예약금 10,000원</span></div>
+          <div class="pr"><span class="k">샌딩 (7/21)</span><span class="v">Florence Hotel → 공항 · 20:00 · 7인승</span></div>
+          <div class="pr"><span class="k">샌딩 요금</span><span class="v">현장 $10 + 예약금 10,000원</span></div>
+          <div class="pr"><span class="k">예약금 합계</span><span class="v" style="color:var(--green);font-weight:700">20,000원 (입금 완료) · 현장 총 $25</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ov-title" style="margin-top:28px;">🏨 호텔</div>
+    <div class="ov-sub">신라모노그램 다낭 · Florence Hotel</div>
+
+    <div class="ov-grid-2">
       <div class="panel">
         <div class="panel-hdr" style="color:var(--green)">🏨 신라모노그램 다낭 (사전결제 완료)</div>
         <div class="panel-body">
@@ -515,7 +531,7 @@ section.active{display:block;}
       <div class="tip-item"><div class="ti">📱</div><div class="tt">Grab + eSIM</div><div class="td">Grab 한국서 미리 설치·카드 등록. eSIM <strong>로밍도깨비</strong> 5일 무제한 <strong style="color:var(--teal)">11,900원</strong> (출국 전 사전 구매)</div></div>
       <div class="tip-item"><div class="ti">🌡</div><div class="tt">7월 날씨</div><div class="td">평균 33~35°C, 건기. UV 극강 → SPF50+ 필수. 스콜은 30~60분짜리</div></div>
       <div class="tip-item"><div class="ti">💳</div><div class="tt">결제</div><div class="td">대형 식당·호텔 카드 가능. 시장·로컬 식당은 현금 전용. 흥정은 기본!</div></div>
-      <div class="tip-item"><div class="ti">🚗</div><div class="tt">이동수단</div><div class="td">Day1·3·5 Grab / Day2 기사포함 차량 ($50~80) / Day4 리조트만</div></div>
+      <div class="tip-item"><div class="ti">🚗</div><div class="tt">이동수단</div><div class="td">공항 픽업/샌딩 7인승 예약 완료 · Day2 기사포함 차량 · 시내 Grab · Day4 리조트만</div></div>
       <div class="tip-item"><div class="ti">⏰</div><div class="tt">시차</div><div class="td">한국보다 2시간 느림. 한국 정오 = 다낭 오전 10시.</div></div>
     </div>
 
@@ -527,7 +543,7 @@ section.active{display:block;}
       </div>
       <div class="tb-r">
         <div class="lab">일별 예산</div>
-        <div class="row">DAY 1 · 약 12~15만원</div>
+        <div class="row">DAY 1 · 약 14~17만원</div>
         <div class="row">DAY 2 · 약 20~28만원</div>
         <div class="row">DAY 3 · 약 7~12만원+쇼핑</div>
         <div class="row">DAY 4 · 약 25~33만원</div>
@@ -587,7 +603,7 @@ section.active{display:block;}
       <div class="budget-card">
         <div class="budget-hdr" style="color:var(--day1)"><span class="bicon">💰</span>당일 예산 (2인)</div>
         <div id="bud1"></div>
-        <div class="budget-total"><span class="tl2">합계</span><span class="ta" style="color:var(--day1)">약 12~15만원</span></div>
+        <div class="budget-total"><span class="tl2">합계</span><span class="ta" style="color:var(--day1)">약 14~17만원</span></div>
       </div>
       <div class="info-card">
         <h4>🛍 한시장 쇼핑 공략</h4>
@@ -979,8 +995,11 @@ buildTL('tl1',[
   {time:'13:50',place:'다낭 국제공항 T2 도착',sub:'VN431 · 입국심사 + 수하물 약 40분',costType:'',hl:false,emoji:'✈',
    img:I.airport,desc:'인천을 출발한 베트남항공 VN431편이 다낭 국제공항 T2(국제선 터미널)에 도착합니다. 입국심사와 수하물 수령까지 약 40분 소요. 공항 내 SIM 카드나 eSIM을 미리 준비해두면 도착 즉시 Grab 호출이 가능합니다.',
    tags:['T2 국제선','입국심사 약 40분','eSIM 활성화']},
-  {time:'14:30',place:'신라모노그램 다낭',sub:'Grab 이동 약 30분 · ~160,000 VND',cost:'~8,800원',costType:'vnd',hl:false,emoji:'🏨',
-   img:I.hotel,desc:'Grab 앱으로 신라모노그램 다낭까지 약 30분 이동합니다. 하미 비치 바로 앞에 위치한 5성급 리조트로, 오션뷰 객실에서 처음 만나는 베트남 바다를 감상하세요. 체크인은 15:00 이후이며, 일찍 도착하면 짐만 맡기고 바로 출발할 수 있습니다.',
+  {time:'13:50',place:'공항 픽업 차량 · 신라모노그램行',sub:'7인승 예약 완료 · 기사 포함 · VN431 도착편',cost:'$15 현장지불',costType:'usd',hl:true,emoji:'🚐',
+   img:I.grab,desc:'예약해둔 <strong>7인승 픽업 차량</strong>으로 편하게 이동합니다. VN431 도착편 기준 픽업 예약 완료.<br><br><strong>📅 픽업 날짜</strong> 07월 17일 (금)<br><strong>🕐 픽업 시간</strong> 13:50 도착편<br><strong>📍 픽업 장소</strong> 다낭 공항 (VN431 Airport)<br><strong>🏁 종료 장소</strong> Shilla Monogram Danang (Quảng Nam)<br><strong>🚙 차량</strong> 7인승<br><strong>💰 요금</strong> 현장지불 $15 + 예약금 10,000원 (입금 완료)<br><strong>💡 팁</strong> 짐 많은 커플 여행에 딱! 기사가 공항에서 이름 팻말 들고 대기',
+   tags:['7인승 예약 완료','$15 현장지불','예약금 입금완료','기사 포함']},
+  {time:'14:30',place:'신라모노그램 다낭 도착',sub:'공항에서 차량 약 30~40분',costType:'inc',hl:false,emoji:'🏨',
+   img:I.hotel,desc:'픽업 차량으로 신라모노그램 다낭에 도착합니다. 하미 비치 바로 앞에 위치한 5성급 리조트로, 오션뷰 객실에서 처음 만나는 베트남 바다를 감상하세요. 체크인은 15:00 이후이며, 일찍 도착하면 짐만 맡기고 바로 출발할 수 있습니다.',
    tags:['체크인 15:00','짐만 두고 출발','오션뷰 객실']},
   {time:'16:00',place:'한시장 (Han Market)',sub:'1시간 집중 쇼핑 · 크록스 4층 · 의류 2층',cost:'~10만원~',costType:'vnd',hl:true,emoji:'🛍',
    img:I.hanmkt,desc:`다낭 최대 전통 시장. 최적 방문 시간은 <strong>오전 9~10시</strong>이지만 우리 일정상 16:00 방문 — 마감 19:00 전까지 1시간 집중 쇼핑!<br><br>
@@ -1026,7 +1045,8 @@ buildTL('tl1',[
 ]);
 
 buildBud('bud1',[
-  ['Grab 이동 합계','420,000 VND','~23,100원'],
+  ['공항 픽업 차량 (7인승)','현장 $15 + 예약금 10,000원','~30,700원'],
+  ['한시장→스파→저녁 Grab','~130,000 VND','~7,150원'],
   ['한시장 쇼핑','200,000~400,000 VND','~11~22만원'],
   ['온다스파 90분 (2인, 도깨비 20% 할인)','1,152,000~1,228,800동','~66,000~70,000원'],
   ['팁 (2인)','144,000동','~8,400원'],
@@ -1192,9 +1212,12 @@ buildTL('tl5',[
    tags:['수족관 직접 선택','정찰제','도깨비 10% 할인','마늘버터 새우 추천','귀국날 동선 최적']},
   {time:'19:00',place:'Florence Hotel 복귀 · 짐 수령',sub:'짐 챙기고 공항 출발 준비',cost:'~5,500원',costType:'vnd',hl:false,emoji:'🧳',
    img:I.hotel,desc:'조조씨푸드에서 Grab으로 Florence Hotel에 복귀해 짐을 챙깁니다. 공항까지 약 20분 거리이므로 20:00 전에 호텔을 나서면 넉넉히 도착 가능합니다.',tags:['Florence Hotel','짐 챙기기','공항 출발 준비']},
-  {time:'20:00',place:'다낭 국제공항 T2',sub:'출발 3시간 전 도착 필수! · 체크인+출국심사',cost:'~6,600원',costType:'vnd',hl:true,emoji:'✈',
-   img:I.airport,desc:'다낭 국제공항 T2(국제선 터미널)에 도착합니다. 23:30 출발이므로 20:30까지는 도착하는 것을 권장합니다. 체크인 후 출국심사를 마치면 면세점에서 남은 VND를 소진하세요. 재환전이 어려우므로 면세점에서 모두 쓰는 것이 좋아요.',
-   tags:['T2 국제선','3시간 전 도착','남은 VND 면세점 소진!']},
+  {time:'20:00',place:'공항 샌딩 차량 · Florence → 공항',sub:'7인승 예약 완료 · 기사 포함',cost:'$10 현장지불',costType:'usd',hl:true,emoji:'🚐',
+   img:I.grab,desc:'예약해둔 <strong>7인승 샌딩 차량</strong>으로 공항까지 편하게 이동합니다.<br><br><strong>📅 픽업 날짜</strong> 07월 21일 (화)<br><strong>🕐 픽업 시간</strong> 20:00<br><strong>📍 픽업 장소</strong> Florence Hotel<br><strong>🏁 종료 장소</strong> 다낭 공항 (Airport Danang)<br><strong>🚙 차량</strong> 7인승<br><strong>💰 요금</strong> 현장지불 $10 + 예약금 10,000원 (입금 완료)<br><strong>💡 팁</strong> 20:00 출발이면 공항 도착 약 20:30 — 23:30 출발까지 충분!',
+   tags:['7인승 예약 완료','$10 현장지불','예약금 입금완료','기사 포함']},
+  {time:'20:40',place:'다낭 국제공항 T2 · 체크인',sub:'출발 3시간 전 · 체크인+출국심사',costType:'inc',hl:false,emoji:'✈',
+   img:I.airport,desc:'다낭 국제공항 T2(국제선 터미널)에 도착합니다. 23:30 출발이므로 여유롭게 체크인할 수 있어요. 체크인 후 출국심사를 마치면 면세점에서 남은 VND를 소진하세요. 재환전이 어려우므로 면세점에서 모두 쓰는 것이 좋아요.',
+   tags:['T2 국제선','체크인+출국심사','남은 VND 면세점 소진!']},
   {time:'23:30',place:'VN430 · 귀국 출발',sub:'인천 도착 07/22(수) 06:00',costType:'inc',hl:true,emoji:'🛫',
    img:I.airport,desc:'베트남항공 VN430편으로 인천국제공항 T1으로 귀국합니다. 비행시간 약 4시간 30분. 7월 22일 오전 6시에 인천에 도착합니다. 좋은 추억 가득한 다낭 여행의 완벽한 마무리입니다!',
    tags:['VN430','인천 T1 도착 06:00','4시간 30분']},
@@ -1271,7 +1294,8 @@ buildTL('listTour',[
 ]);
 
 buildBud('bud5',[
-  ['Grab 이동 합계','420,000 VND','~23,100원'],
+  ['공항 샌딩 차량 (7인승)','현장 $10 + 예약금 10,000원','~24,000원'],
+  ['시내 Grab 이동','~250,000 VND','~13,750원'],
   ['맛집 3곳 (2인)','250,000~500,000 VND','~13,750~27,500원'],
   ['카페+간식 (2인)','100,000~200,000 VND','~5,500~11,000원'],
   ['조조씨푸드 저녁 (2인)','400,000~700,000 VND','~22,000~38,500원'],
