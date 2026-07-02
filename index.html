@@ -416,7 +416,7 @@ section.active{display:block;}
         <div class="dnum" style="color:var(--day3)">3</div>
         <div class="ddate">7/19 (일)</div>
         <div class="dtheme">시내 맛집 · 롯데마트 · 카페 투어</div>
-        <div class="dbudget" style="color:var(--day3)">약 7~12만원+쇼핑</div>
+        <div class="dbudget" style="color:var(--day3)">약 16~21만원+쇼핑</div>
       </div>
       <div class="dc" onclick="showTab('day4')" style="border-top-color:var(--day4)">
         <div class="dnum" style="color:var(--day4)">4</div>
@@ -545,7 +545,7 @@ section.active{display:block;}
         <div class="lab">일별 예산</div>
         <div class="row">DAY 1 · 약 14~17만원</div>
         <div class="row">DAY 2 · 약 20~28만원</div>
-        <div class="row">DAY 3 · 약 7~12만원+쇼핑</div>
+        <div class="row">DAY 3 · 약 16~21만원+쇼핑</div>
         <div class="row">DAY 4 · 약 25~33만원</div>
         <div class="row">DAY 5 · 약 5~8만원</div>
       </div>
@@ -703,7 +703,7 @@ section.active{display:block;}
   <div class="day-hdr" style="background:linear-gradient(135deg,var(--teal-l),#fff)">
     <div class="day-eyebrow" style="color:var(--day3)">DAY 3  ·  2026년 7월 19일 (일)</div>
     <h1 class="day-h1">다낭 시내 자유여행  +  롯데마트  +  조조씨푸드</h1>
-    <div class="day-hsub">Grab으로 자유롭게 · 미슐랭 맛집 · 카페 · 롯데마트 · 조조씨푸드</div>
+    <div class="day-hsub">Grab으로 자유롭게 · 미슐랭 맛집 · 카페 · 롯데마트 · 아리스파 · 조조씨푸드</div>
   </div>
   <div class="day-body">
     <div>
@@ -714,6 +714,7 @@ section.active{display:block;}
           <div class="leg-i"><div class="leg-d" style="background:var(--teal)"></div>호텔</div>
           <div class="leg-i"><div class="leg-d" style="background:#e65100"></div>분짜까·반미·콩카페</div>
           <div class="leg-i"><div class="leg-d" style="background:#ab47bc"></div>롯데마트</div>
+          <div class="leg-i"><div class="leg-d" style="background:#00807d"></div>아리스파 (미케비치)</div>
           <div class="leg-i"><div class="leg-d" style="background:#c62828"></div>조조씨푸드</div>
         </div>
       </div>
@@ -724,7 +725,7 @@ section.active{display:block;}
       <div class="budget-card">
         <div class="budget-hdr" style="color:var(--day3)"><span class="bicon">💰</span>당일 예산 (2인)</div>
         <div id="bud3"></div>
-        <div class="budget-total"><span class="tl2">합계</span><span class="ta" style="color:var(--day3)">약 7~12만원 + 쇼핑</span></div>
+        <div class="budget-total"><span class="tl2">합계</span><span class="ta" style="color:var(--day3)">약 16~21만원 + 쇼핑</span></div>
       </div>
       <div class="info-card">
         <h4>🛒 롯데마트 층별 안내</h4>
@@ -1127,10 +1128,16 @@ buildTL('tl3',[
   {time:'14:00',place:'롯데마트',sub:'5층 대형마트 · 크록스 정품(4층) · 귀국선물(2층)',cost:'예산 자유',costType:'',hl:true,emoji:'🛒',
    img:I.lotte,desc:'다낭 최대 규모의 한국계 대형마트. 총 5층으로 구성되어 있으며 2층에서 G7 커피믹스·포·과자·라면·소스 등 귀국 선물용 식품을 구입할 수 있습니다. 4층에는 크록스 정품 매장이 있어요(M11까지). 입구의 안면인식 짐 보관함에 쇼핑백을 맡기면 편리합니다.',
    tags:['07:30~22:00','2층: 귀국선물','4층: 크록스 정품','짐 보관함']},
-  {time:'16:30',place:'Grab으로 조조씨푸드 이동',sub:'약 15분',cost:'~3,300원',costType:'vnd',hl:false,emoji:'🚕',
-   img:I.grab,desc:'롯데마트에서 Grab으로 미케비치 방향으로 약 15분 이동합니다. 조조씨푸드는 미케비치 인근에 위치해 있어요.',
-   tags:['약 15분','미케비치 방향']},
-  {time:'17:00',place:'조조씨푸드 · 해산물 저녁',sub:'수족관 직접 선택 · 정찰제 · 도깨비 최대 10% 할인',cost:'~2~3.5만원/인',costType:'vnd',hl:true,emoji:'🦞',
+  {time:'15:30',place:'Grab으로 아리스파 이동',sub:'롯데마트 → 미케비치 방향 약 15분',cost:'~3,300원',costType:'vnd',hl:false,emoji:'🚕',
+   img:I.grab,desc:'롯데마트에서 Grab으로 미케비치 방향 아리스파까지 약 15분 이동합니다. 2인 이상 무료 픽드랍도 가능하니 예약 시 요청하세요.',
+   tags:['약 15분','미케비치 방향','2인↑ 픽드랍 무료']},
+  {time:'15:45',place:'아리스파 (ARI SPA) · 마사지 90분',sub:'미케비치 고급 신상 스파 · 도깨비 20% 할인',cost:'$36~38/인',costType:'usd',hl:true,emoji:'💆',
+   img:I.spa,desc:'미케비치 인근 고급 신상 스파에서 저녁 식사 전 여독을 풀어요. 프라이빗 룸(개별 샤워실)에서 편안하게 즐길 수 있습니다.<br><br><strong>💰 비용 (팁 별도)</strong><br>아로마 90분: $36 / 스페셜(아로마+핫스톤) 90분: $38 (828,000동)<br>팁: 90분 $3/인<br><strong>🎫 할인</strong> 도깨비 회원 20% 할인<br><strong>📞 예약</strong> 카카오톡 「아리스파」 · 100% 예약제 (입실 후 선불)<br><strong>💆 특징</strong> 부위·압 세기·오일 향 선택 가능 · 마무리 파우더 케어<br><strong>🚐 이동</strong> 마사지 후 조조씨푸드까지 도보/Grab 5분 (같은 미케비치 지역)',
+   tags:['도깨비 20%','프라이빗 룸','100% 예약제','저녁 전 여독 풀기']},
+  {time:'17:15',place:'조조씨푸드로 이동',sub:'아리스파 → 조조씨푸드 약 5분 (같은 미케비치)',cost:'~2,000원',costType:'vnd',hl:false,emoji:'🚕',
+   img:I.grab,desc:'아리스파에서 조조씨푸드까지는 같은 미케비치 지역이라 도보 또는 Grab으로 5분이면 도착합니다.',
+   tags:['약 5분','미케비치 지역']},
+  {time:'17:30',place:'조조씨푸드 · 해산물 저녁',sub:'수족관 직접 선택 · 정찰제 · 도깨비 최대 10% 할인',cost:'~2~3.5만원/인',costType:'vnd',hl:true,emoji:'🦞',
    img:I.seafood,desc:'미케비치 인근의 인기 해산물 식당. 입구 수족관에서 살아있는 해산물을 직접 눈으로 보고 선택한 후 원하는 조리법으로 주문할 수 있어 신선도가 최상입니다. 마늘버터 새우, 칠리소스 랍스터, 게찜, 오징어 볶음이 대표 메뉴예요. 정찰제로 운영되어 흥정 걱정이 없고, 에어컨 빵빵한 실내 좌석도 쾌적합니다. 다낭도깨비 카페 회원은 최대 10% 할인 적용 가능.',
    tags:['수족관 직접 선택','정찰제','도깨비 10% 할인','마늘버터 새우 추천','에어컨 실내']},
 ]);
@@ -1140,6 +1147,7 @@ buildBud('bud3',[
   ['점심+간식 (2인)','130,000~160,000 VND','~7,150~8,800원'],
   ['콩카페 (2인)','70,000~110,000 VND','~3,850~6,050원'],
   ['롯데마트 쇼핑','300,000~600,000 VND','~16,500~33,000원'],
+  ['아리스파 90분 (2인, 도깨비 20% 할인)','$58~61 + 팁 $6','~90,000원'],
   ['조조씨푸드 해산물 저녁 (2인)','400,000~700,000 VND','~22,000~38,500원'],
 ]);
 
@@ -1258,6 +1266,10 @@ buildTL('listSpa',[
    img:I.massage,desc:'호텔 전체를 스파로 리노베이션한 한시장 No.1 신상 고급 스파. 베드 40개·개별룸 16개.<br><br><strong>💰 비용 (도깨비 20% 할인가)</strong><br>아로마 90분: 576,000동 (~33,000원)/인<br>시그니처 90분: 614,400동 (~35,000원)/인<br>팁 별도: 90분 72,000동 (~4,200원)/인<br><strong>📍 주소</strong> 142 Bach Dang, Hai Chau (한시장 도보 2분)<br><strong>🕐 운영</strong> 10:00~22:00 (라스트오더 21:00)<br><strong>📞 예약</strong> 카카오톡 채널 「온다스파」 한국어 예약<br><strong>🎫 할인</strong> 기본 20% / 해피아워(10~12:30) 30% / 영수증 지참 30%<br><strong>🚐 픽드랍</strong> 2인 이상 무료 (신라모노그램까지!)',
    tags:['도깨비 20%','한강뷰','픽드랍 무료','카카오톡 예약','★4.9']},
 
+  {time:'💆',place:'아리스파 (ARI SPA)',sub:'미케비치 인근 고급 신상 스파 · DAY 3 방문 예정',cost:'~4~5만원/인',costType:'vnd',hl:true,emoji:'💆',
+   img:I.spa,desc:'미케비치 도보 6분 거리의 고급 신상 스파. 자연친화적 인테리어와 프라이빗 룸(개별 샤워실·화장실)으로 다낭 도깨비 카페에서 마사지 추천 1위로 꼽히는 곳입니다.<br><br><strong>💰 비용 (팁 별도)</strong><br>아로마 90분: $36 / 120분: $43<br>스페셜(아로마+핫스톤) 90분: $38 (828,000동) / 120분: $45 (989,000동)<br>팁: 90분 $3 / 120분 $4<br><strong>📍 주소</strong> 판밤동 한인촌 (바빌론 스테이크 2호점·K마켓 옆, 미케비치 도보 6분)<br><strong>🕐 운영</strong> 10:00~22:00 (라스트오더 21:00)<br><strong>📞 예약</strong> 카카오톡 「아리스파」 검색·채널 추가 · 100% 예약제 (입실 후 선불)<br><strong>🎫 할인</strong> 도깨비 회원 20% / 렌트카·투어 이용 시 40% 바우처<br><strong>🚐 픽드랍</strong> 2인 이상 무료 (공항 제외)<br><strong>💆 특징</strong> 부위·압 세기·오일 향 선택 가능 · 마무리 파우더 케어',
+   tags:['도깨비 20%','프라이빗 룸','카카오톡 예약','100% 예약제','미케비치 도보 6분']},
+
   {time:'💆',place:'설화수 스파 (신라모노그램)',sub:'리조트 내 프리미엄 스파 · DAY 4 방문 예정',cost:'~11만원/인~',costType:'vnd',hl:false,emoji:'💆',
    img:I.spa,desc:'신라모노그램 리조트 내 설화수 브랜드 스파. 리조트 풀데이에 즐기기 좋은 프리미엄 트리트먼트.<br><br><strong>💰 비용</strong> 90분 약 2,000,000동 (~11만원)/인<br><strong>📍 위치</strong> 신라모노그램 다낭 리조트 내<br><strong>🕐 운영</strong> 09:00~22:00<br><strong>📞 예약</strong> 체크인 당일 즉시 예약 권장 (커플룸 2인 동시 트리트먼트 가능)<br><strong>💆 추천</strong> 설화수 시그니처 트리트먼트',
    tags:['리조트 내','커플룸','체크인 당일 예약','프리미엄']},
@@ -1332,7 +1344,7 @@ function initMap(id){
     L.polyline(pts.map(p=>[p[0],p[1]]),{color:'#c05a20',weight:2.5,dashArray:'8,6',opacity:0.7}).addTo(m);
     L.control.zoom({position:'bottomright'}).addTo(m); maps['day2']=m;
   } else if(id==='day3'){
-    const pts=[[15.9628,108.2889,'호텔','#007d7a',1],[16.0744,108.2208,'분짜까 109','#e65100',2],[16.0687,108.2247,'반미 Happy','#c62828',3],[16.069,108.2249,'콩카페','#ab47bc',5],[16.0348,108.2293,'롯데마트','#ab47bc',6],[16.0624,108.2463,'조조씨푸드','#c62828',7]];
+    const pts=[[15.9628,108.2889,'호텔','#007d7a',1],[16.0744,108.2208,'분짜까 109','#e65100',2],[16.0687,108.2247,'반미 Happy','#c62828',3],[16.069,108.2249,'콩카페','#ab47bc',5],[16.0348,108.2293,'롯데마트','#ab47bc',6],[16.058,108.246,'아리스파','#00807d',7],[16.0624,108.2463,'조조씨푸드','#c62828',8]];
     const m=L.map('map3',opt).setView([16.02,108.24],11);
     L.tileLayer(TILE,{attribution:ATTR}).addTo(m);
     pts.forEach(p=>L.marker([p[0],p[1]],{icon:mkIcon(p[3],p[4])}).bindPopup(`<b>${p[2]}</b>`).addTo(m));
