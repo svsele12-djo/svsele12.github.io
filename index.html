@@ -444,34 +444,53 @@ section.active{display:block;}
           <div class="pr"><span class="k">체크아웃</span><span class="v">2026.07.21  ~12:00 (4박)</span></div>
           <div class="pr"><span class="k">조식</span><span class="v">매일 2인 포함 (18일~21일)</span></div>
           <div class="pr"><span class="k">보증금</span><span class="v">VND 2,000,000/일 · 체크인 시 현장결제</span></div>
-          <div style="margin:10px 0 4px;background:linear-gradient(135deg,#e8f4f4,#f5f0e8);border:1px solid #c5dada;border-radius:10px;padding:12px 14px;">
-            <div style="font-size:11px;font-weight:700;color:var(--teal);margin-bottom:8px;letter-spacing:0.5px;">💰 보증금 계산 (4박 기준)</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;">
-              <div style="background:#fff;border-radius:8px;padding:8px 10px;border:1px solid #d0e8e8;text-align:center;">
-                <div style="font-size:10px;color:#888;margin-bottom:3px;">🇻🇳 베트남 동 (VND)</div>
-                <div style="font-size:15px;font-weight:700;color:#1a6b6b;">8,000,000<span style="font-size:11px;font-weight:400;"> 동</span></div>
-                <div style="font-size:10px;color:#aaa;margin-top:2px;">2,000,000 × 4박</div>
-              </div>
-              <div style="background:#fff;border-radius:8px;padding:8px 10px;border:1px solid #d0e8e8;text-align:center;">
-                <div style="font-size:10px;color:#888;margin-bottom:3px;">🇺🇸 미국 달러 (USD)</div>
-                <div style="font-size:15px;font-weight:700;color:#1a6b6b;">≈ $<span id="dep-usd">—</span></div>
-                <div style="font-size:10px;color:#aaa;margin-top:2px;">1 USD ≈ <span id="usd-vnd-rate">—</span> VND</div>
-              </div>
-            </div>
-            <div style="background:#fff3e0;border-radius:8px;padding:8px 12px;border:1px solid #ffe0b2;">
-              <div style="font-size:10px;color:#888;margin-bottom:4px;">📈 USD → KRW 실시간 환율</div>
-              <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;">
-                <div>
-                  <span style="font-size:13px;font-weight:700;color:#e65100;">$<span id="dep-usd2">—</span></span>
-                  <span style="font-size:11px;color:#999;"> = </span>
-                  <span style="font-size:15px;font-weight:700;color:#bf360c;" id="dep-krw">— 원</span>
-                </div>
-                <div style="text-align:right;">
-                  <div style="font-size:10px;color:#999;">1 USD = <span id="usd-krw-rate">—</span>원</div>
-                  <div style="font-size:9px;color:#bbb;" id="rate-time">환율 불러오는 중...</div>
-                </div>
-              </div>
-            </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-hdr" style="color:var(--teal)">🏨 Florence Hotel (0.5박 · 사전결제 완료)</div>
+        <div class="panel-body">
+          <div class="pr"><span class="k">호텔</span><span class="v">Florence Hotel Danang</span></div>
+          <div class="pr"><span class="k">객실</span><span class="v">디럭스 더블룸 · 조식 2인 포함</span></div>
+          <div class="pr"><span class="k">체크인</span><span class="v">2026.07.21 (화) 14:00 <span style="font-size:11px;color:#888">(금연·고층 요청 완료)</span></span></div>
+          <div class="pr"><span class="k">체크아웃</span><span class="v">2026.07.22 (수) 12:00 (0.5박)</span></div>
+          <div class="pr"><span class="k">주소</span><span class="v">8 Nai Nam 8 Street, Da Nang</span></div>
+          <div class="pr"><span class="k">예약처</span><span class="v">NOL (nol.co.kr) · 1644-1346</span></div>
+          <div class="pr"><span class="k">확인번호</span><span class="v"><span class="secret" onclick="toggleSecret(this)" title="탭하면 표시됩니다"><span class="s-val">1742452290</span><span class="s-badge">🔒 탭하면 표시</span></span></span></div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 보증금 계산기 ── -->
+    <div style="margin:0 0 20px;background:linear-gradient(135deg,#e6f4f4,#f5f0e8);border:1.5px solid #b8d8d8;border-radius:16px;padding:18px 22px;">
+      <div style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:14px;display:flex;align-items:center;gap:6px;">
+        <span>💰</span> 신라모노그램 보증금 계산 (4박 기준 · 체크인 시 현장 결제)
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1.6fr;gap:12px;align-items:stretch;">
+        <!-- VND -->
+        <div style="background:#fff;border-radius:12px;padding:14px 16px;border:1px solid #c8e6e6;text-align:center;">
+          <div style="font-size:11px;color:#888;margin-bottom:6px;font-weight:600;">🇻🇳 베트남 동 (VND)</div>
+          <div style="font-size:26px;font-weight:800;color:#1a6b6b;line-height:1.1;">8,000,000</div>
+          <div style="font-size:12px;color:#999;margin-top:4px;">동</div>
+          <div style="font-size:11px;color:#bbb;margin-top:4px;">2,000,000 × 4박</div>
+        </div>
+        <!-- USD -->
+        <div style="background:#fff;border-radius:12px;padding:14px 16px;border:1px solid #c8e6e6;text-align:center;">
+          <div style="font-size:11px;color:#888;margin-bottom:6px;font-weight:600;">🇺🇸 미국 달러 (USD)</div>
+          <div style="font-size:26px;font-weight:800;color:#1a6b6b;line-height:1.1;">≈ $<span id="dep-usd">—</span></div>
+          <div style="font-size:11px;color:#bbb;margin-top:8px;">1 USD ≈ <span id="usd-vnd-rate">—</span> VND</div>
+        </div>
+        <!-- KRW 실시간 -->
+        <div style="background:linear-gradient(135deg,#fff8ee,#fff3e0);border-radius:12px;padding:14px 18px;border:1px solid #ffe0b2;">
+          <div style="font-size:11px;color:#888;margin-bottom:8px;font-weight:600;">📈 USD → KRW 실시간 환율</div>
+          <div style="display:flex;align-items:baseline;gap:6px;flex-wrap:wrap;">
+            <span style="font-size:16px;font-weight:700;color:#e65100;">$<span id="dep-usd2">—</span></span>
+            <span style="font-size:13px;color:#bbb;">=</span>
+            <span style="font-size:24px;font-weight:800;color:#bf360c;" id="dep-krw">— 원</span>
+          </div>
+          <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:4px;">
+            <span style="font-size:11px;color:#999;">1 USD = <span id="usd-krw-rate">—</span>원</span>
+            <span style="font-size:10px;color:#bbb;" id="rate-time">환율 불러오는 중...</span>
           </div>
         </div>
       </div>
@@ -746,7 +765,7 @@ section.active{display:block;}
         <div class="ii"><span class="ik">보조배터리</span><span class="iv">기내 반입 (위탁 불가!)</span></div>
         <div class="ii"><span class="ik">VND</span><span class="iv">남은 돈 면세점에서 소진!</span></div>
       </div>
-      <div class="tip-box">짐은 체크아웃 후 프런트에 <strong>무료 보관</strong>. 저녁 후 호텔 복귀해 짐 챙기고 공항 이동. VN430, 7/22(수) 06:00 인천 도착.</div>
+      <div class="tip-box">신라모노그램 체크아웃(11:00) → 짐 보관 → 시내 투어 → <strong>Florence Hotel 체크인(14:00)</strong> → 조조씨푸드 → Florence Hotel 복귀·짐 수령(19:00) → 공항(20:00) → VN430 (23:30). 7/22(수) 06:00 인천 도착.</div>
     </div>
   </div>
 </section>
@@ -1114,9 +1133,9 @@ buildTL('tl5',[
   {time:'07:30',place:'마지막 조식 · 비치 산책',sub:'Dining M 뷔페 + 이른 아침 바다',costType:'inc',hl:false,emoji:'🌊',
    img:I.beach,desc:'체크아웃 전 마지막으로 호텔 시설을 만끽합니다. 조식 후 비치를 산책하며 이번 여행의 마지막 바다 공기를 깊이 마셔두세요.',
    tags:['조식 포함','마지막 비치 산책']},
-  {time:'11:00',place:'체크아웃 · 짐 보관',sub:'프런트에 짐 무료 보관 요청',costType:'free',hl:false,emoji:'🏨',
-   img:I.hotel,desc:'체크아웃(12:00 이전) 후 짐은 호텔 프런트에 무료로 맡길 수 있습니다. 가볍게 시내로 나가 오후를 즐기다가 공항 출발 전 짐을 찾으러 오세요.',
-   tags:['12:00 이전 체크아웃','짐 무료 보관','가벼운 시내 투어']},
+  {time:'11:00',place:'신라모노그램 체크아웃',sub:'12:00 이전 체크아웃 · 짐은 Florence Hotel로',costType:'free',hl:false,emoji:'🏨',
+   img:I.hotel,desc:'체크아웃(12:00 이전) 후 짐은 오후에 체크인할 Florence Hotel로 이동합니다. 먼저 짐을 신라모노그램에 잠시 맡겨두고 가볍게 시내 투어를 즐긴 후, 14:00 Florence Hotel 체크인 시 짐을 가져가세요.',
+   tags:['12:00 이전 체크아웃','Florence Hotel 14:00 체크인','가벼운 시내 투어']},
   {time:'11:30',place:'Grab으로 시내 이동',sub:'분짜까 109 방향 · 약 30분',cost:'~5,500원',costType:'vnd',hl:false,emoji:'🚕',
    img:I.grab,desc:'시내로 이동해 다낭 마지막 맛집 투어를 시작합니다.',tags:['Grab 약 30분']},
   {time:'12:00',place:'Bun Cha Ca 109 · 점심',sub:'2025 미슐랭 빕구르망 · 25,000~30,000 VND/인',cost:'~3,300원/인',costType:'vnd',hl:true,emoji:'🍜',
@@ -1131,11 +1150,14 @@ buildTL('tl5',[
   {time:'14:30',place:'꼰시장 · 마지막 쇼핑',sub:'2,000개 노점 · 기념품 · 현금 필요',cost:'~5.5만원~',costType:'vnd',hl:false,emoji:'🛍',
    img:I.hanmkt,desc:'한시장보다 로컬 분위기가 강한 꼰시장에서 마지막 기념품 쇼핑을 합니다. 피쉬소스, 건어물, 베트남 커피, 아오자이 등 실용적인 선물을 구입하기 좋아요.',
    tags:['현금 필요','한시장보다 로컬','기념품 쇼핑']},
+  {time:'14:00',place:'Florence Hotel · 체크인',sub:'0.5박 · 디럭스 더블룸 · 조식 포함 · NOL 예약',costType:'inc',hl:false,emoji:'🏨',
+   img:I.hotel,desc:'신라모노그램 체크아웃 후 짐은 플로렌스 호텔로 이동. 늦은 밤 비행기 전 시내에서 편하게 쉴 수 있는 0.5박 숙소입니다. 디럭스 더블룸 조식 포함 예약 완료 (NOL). 금연 · 고층 요청 완료. 체크인 후 짐을 풀고 가볍게 쉬다가 조조씨푸드로 출발!',
+   tags:['NOL 예약 완료','조식 포함','0.5박 거점 숙소','금연 고층 요청']},
   {time:'17:30',place:'조조씨푸드 · 마지막 해산물 만찬',sub:'수족관 직접 선택 · 정찰제 · 도깨비 최대 10% 할인',cost:'~2~3.5만원/인',costType:'vnd',hl:true,emoji:'🦞',
    img:I.seafood,desc:'다낭에서의 마지막 저녁은 조조씨푸드에서! 입구 수족관에서 살아있는 해산물을 직접 눈으로 확인하고 선택합니다. 마늘버터 새우, 칠리소스 랍스터, 게찜, 오징어 볶음이 대표 메뉴. 정찰제 운영으로 흥정 걱정 없고 에어컨 실내 좌석도 쾌적합니다. 1시간 30분이면 여유롭게 식사 가능 — 19:00 마무리 후 호텔 짐 수령 → 20:00 공항 출발 동선에 딱 맞아요.',
    tags:['수족관 직접 선택','정찰제','도깨비 10% 할인','마늘버터 새우 추천','귀국날 동선 최적']},
-  {time:'19:00',place:'호텔 복귀 · 짐 수령',sub:'프런트에 맡긴 짐 찾기',cost:'~5,500원',costType:'vnd',hl:false,emoji:'🧳',
-   img:I.hotel,desc:'Grab으로 호텔에 들러 맡겨둔 짐을 찾고 공항으로 출발 준비를 합니다.',tags:['짐 수령']},
+  {time:'19:00',place:'Florence Hotel 복귀 · 짐 수령',sub:'짐 챙기고 공항 출발 준비',cost:'~5,500원',costType:'vnd',hl:false,emoji:'🧳',
+   img:I.hotel,desc:'조조씨푸드에서 Grab으로 Florence Hotel에 복귀해 짐을 챙깁니다. 공항까지 약 20분 거리이므로 20:00 전에 호텔을 나서면 넉넉히 도착 가능합니다.',tags:['Florence Hotel','짐 챙기기','공항 출발 준비']},
   {time:'20:00',place:'다낭 국제공항 T2',sub:'출발 3시간 전 도착 필수! · 체크인+출국심사',cost:'~6,600원',costType:'vnd',hl:true,emoji:'✈',
    img:I.airport,desc:'다낭 국제공항 T2(국제선 터미널)에 도착합니다. 23:30 출발이므로 20:30까지는 도착하는 것을 권장합니다. 체크인 후 출국심사를 마치면 면세점에서 남은 VND를 소진하세요. 재환전이 어려우므로 면세점에서 모두 쓰는 것이 좋아요.',
    tags:['T2 국제선','3시간 전 도착','남은 VND 면세점 소진!']},
