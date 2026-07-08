@@ -359,6 +359,65 @@ section.active{display:block;}
 </head>
 <body>
 
+<!-- ══════════ 로그인 게이트 ══════════ -->
+<div id="loginGate" style="position:fixed;inset:0;z-index:99999;background:linear-gradient(135deg,#00807d 0%,#1a6b6b 50%,#0d4d4a 100%);display:flex;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#fff;border-radius:24px;padding:38px 30px;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.3);text-align:center;">
+    <div style="font-size:44px;margin-bottom:8px;">🌴</div>
+    <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#00807d;margin-bottom:4px;">다낭 여행 2026</div>
+    <div style="font-size:13px;color:#999;margin-bottom:26px;">7.17 – 7.21 · 커플 여행 가이드북</div>
+
+    <div style="text-align:left;margin-bottom:14px;">
+      <label style="font-size:12px;font-weight:600;color:#666;display:block;margin-bottom:5px;">아이디</label>
+      <input id="loginId" type="text" autocomplete="username" placeholder="아이디 입력" style="width:100%;box-sizing:border-box;padding:12px 14px;border:1.5px solid #ddd;border-radius:12px;font-size:15px;outline:none;transition:border 0.2s;" onfocus="this.style.borderColor='#00807d'" onblur="this.style.borderColor='#ddd'">
+    </div>
+    <div style="text-align:left;margin-bottom:20px;">
+      <label style="font-size:12px;font-weight:600;color:#666;display:block;margin-bottom:5px;">비밀번호</label>
+      <input id="loginPw" type="password" autocomplete="current-password" placeholder="비밀번호 입력" style="width:100%;box-sizing:border-box;padding:12px 14px;border:1.5px solid #ddd;border-radius:12px;font-size:15px;outline:none;transition:border 0.2s;" onfocus="this.style.borderColor='#00807d'" onblur="this.style.borderColor='#ddd'" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+
+    <div id="loginError" style="color:#e53935;font-size:12px;margin-bottom:14px;min-height:16px;"></div>
+
+    <button onclick="doLogin()" style="width:100%;padding:13px;background:linear-gradient(135deg,#00807d,#1a6b6b);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:transform 0.1s;" onmousedown="this.style.transform='scale(0.98)'" onmouseup="this.style.transform='scale(1)'">
+      입장하기
+    </button>
+
+    <div style="margin-top:18px;font-size:11px;color:#bbb;">우리 부부만 보는 여행 가이드북 💑</div>
+  </div>
+</div>
+
+<script>
+// ── 로그인 처리 ─────────────────────────
+const ACCOUNTS = {
+  'odh': '851015',
+  'csy': '830227'
+};
+function doLogin(){
+  const id = document.getElementById('loginId').value.trim().toLowerCase();
+  const pw = document.getElementById('loginPw').value.trim();
+  const err = document.getElementById('loginError');
+  if(ACCOUNTS[id] && ACCOUNTS[id] === pw){
+    try{ sessionStorage.setItem('danang_auth','1'); }catch(e){}
+    document.getElementById('loginGate').style.display='none';
+    document.body.style.overflow='';
+  } else {
+    err.textContent = '아이디 또는 비밀번호가 올바르지 않습니다.';
+    document.getElementById('loginPw').value='';
+  }
+}
+// 이미 로그인된 세션이면 게이트 스킵
+(function(){
+  try{
+    if(sessionStorage.getItem('danang_auth')==='1'){
+      const g=document.getElementById('loginGate');
+      if(g) g.style.display='none';
+    } else {
+      document.body.style.overflow='hidden';
+    }
+  }catch(e){}
+})();
+</script>
+
+
 <!-- NAV -->
 <nav>
   <div class="nav-logo">다낭 <span>2026</span></div>
