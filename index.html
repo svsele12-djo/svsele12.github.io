@@ -462,7 +462,7 @@ function doLogin(){
       <div class="dc" onclick="showTab('day1')" style="border-top-color:var(--day1)">
         <div class="dnum" style="color:var(--day1)">1</div>
         <div class="ddate">7/17 (금)</div>
-        <div class="dtheme">공항 도착 · 한시장 쇼핑 · 저녁 · 마사지 90분</div>
+        <div class="dtheme">공항 도착 · 한시장 쇼핑 · 마사지 90분 · 저녁</div>
         <div class="dbudget" style="color:var(--day1)">약 14~17만원</div>
       </div>
       <div class="dc" onclick="showTab('day2')" style="border-top-color:var(--day2)">
@@ -1142,11 +1142,11 @@ buildTL('tl1',[
   {time:'13:50',place:'공항 픽업 차량 · 신라모노그램行',sub:'7인승 예약 완료 · 기사 포함 · VN431 도착편',cost:'$15 현장지불',costType:'usd',hl:true,emoji:'🚐',
    img:I.grab,desc:'예약해둔 <strong>7인승 픽업 차량</strong>으로 편하게 이동합니다. VN431 도착편 기준 픽업 예약 완료.<br><br><strong>📅 픽업 날짜</strong> 07월 17일 (금)<br><strong>🕐 픽업 시간</strong> 13:50 도착편<br><strong>📍 픽업 장소</strong> 다낭 공항 (VN431 Airport)<br><strong>🏁 종료 장소</strong> Shilla Monogram Danang (Quảng Nam)<br><strong>🚙 차량</strong> 7인승<br><strong>💰 요금</strong> 현장지불 $15 + 예약금 10,000원 (입금 완료)<br><strong>💡 팁</strong> 짐 많은 커플 여행에 딱! 기사가 공항에서 이름 팻말 들고 대기',
    tags:['7인승 예약 완료','$15 현장지불','예약금 입금완료','기사 포함']},
-  {time:'14:30',place:'신라모노그램 다낭 도착',sub:'공항에서 차량 약 30~40분',costType:'inc',hl:false,emoji:'🏨',
-   img:I.hotel,desc:'픽업 차량으로 신라모노그램 다낭에 도착합니다. 하미 비치 바로 앞에 위치한 5성급 리조트로, 오션뷰 객실에서 처음 만나는 베트남 바다를 감상하세요. 체크인은 15:00 이후이며, 일찍 도착하면 짐만 맡기고 바로 출발할 수 있습니다.',
-   tags:['체크인 15:00','짐만 두고 출발','오션뷰 객실']},
-  {time:'16:00',place:'한시장 (Han Market)',sub:'1시간 집중 쇼핑 · 크록스 4층 · 의류 2층',cost:'~10만원~',costType:'vnd',hl:true,emoji:'🛍',
-   img:I.hanmkt,desc:`다낭 최대 전통 시장. 최적 방문 시간은 <strong>오전 9~10시</strong>이지만 우리 일정상 16:00 방문 — 마감 19:00 전까지 1시간 집중 쇼핑!<br><br>
+  {time:'14:30',place:'신라모노그램 다낭 도착 · 리조트 휴식',sub:'공항에서 차량 약 30~40분 · 체크인 후 여유롭게 휴식',costType:'inc',hl:false,emoji:'🏨',
+   img:I.hotel,desc:'픽업 차량으로 신라모노그램 다낭에 도착합니다. 하미 비치 바로 앞에 위치한 5성급 리조트로, 오션뷰 객실에서 처음 만나는 베트남 바다를 감상하세요. 체크인은 15:00 이후.<br><br>🛌 <strong>첫날은 리조트에서 충분히 휴식</strong>하며 여독을 풀고, <strong>16:00쯤 Grab으로 시내(한시장)로 출발</strong>합니다. (리조트 → 한시장 약 35분)',
+   tags:['체크인 15:00','리조트 휴식 길게','16:00 시내로 출발','오션뷰 객실']},
+  {time:'16:30',place:'한시장 (Han Market)',sub:'약 1시간 30분 쇼핑 · 크록스 4층 · 의류 2층',cost:'~10만원~',costType:'vnd',hl:true,emoji:'🛍',
+   img:I.hanmkt,desc:`다낭 최대 전통 시장. 최적 방문 시간은 <strong>오전 9~10시</strong>이지만 우리 일정상 16:30 방문 — 약 1시간 30분(~18:00) 여유롭게 쇼핑 후 온다스파로 이동! (마감 19:00 주의)<br><br>
 <strong>🛍 추천 쇼핑 리스트 (노점 번호 참고)</strong><br>
 <table style="width:100%;font-size:12px;border-collapse:collapse;margin-top:6px">
 <tr style="background:#f0f0f0"><th style="padding:4px 6px;text-align:left;border:1px solid #ddd">품목</th><th style="padding:4px 6px;text-align:left;border:1px solid #ddd">노점번호</th><th style="padding:4px 6px;text-align:left;border:1px solid #ddd">가격</th></tr>
@@ -1171,21 +1171,21 @@ buildTL('tl1',[
 • 짙은 색상 의류 물빠짐 주의 → 흰색·밝은색 위주 구매<br>
 • 고액권(50만동)만 있으면 잔돈 문제로 역전패 → <strong>1~5만동 잡돈 준비</strong>`,
    tags:['마감 19:00 주의!','현금 전용','소매치기 조심','잡돈 필수','안쪽 노점 공략','크록스 받을 때 확인']},
-  {time:'17:00',place:'도보 이동 → An Thoi',sub:'한시장에서 도보 약 5분 · 저녁 먼저',costType:'free',hl:false,emoji:'🚶',
-   img:null,desc:'한시장(119 Tran Phu)에서 An Thoi(114 Bach Dang)까지 도보 약 5분. 마사지 예약(18:30) 전에 저녁을 먼저 먹고 개운하게 스파로 이동하는 동선입니다.',
-   tags:['도보 5분','저녁 먼저','Bach Dang 강변']},
-  {time:'17:10',place:'An Thoi 저녁식사',sub:'2024 미슐랭 빕구르망 · 곱창쌀국수 · 번호표 15~30분 대기',cost:'~2.2~2.7만원/인',costType:'vnd',hl:true,emoji:'🍽',
-   img:I.antoi,desc:'114 Bach Dang Street에 위치한 2024 미슐랭 빕구르망 레스토랑. 입장 시 번호표를 뽑고 강변에서 대기하면 됩니다.<br><br>🌟 <strong>시그니처 메뉴: 곱창쌀국수 (Bun Bo Hue / Bun Long)</strong><br>다낭식 곱창쌀국수는 소곱창·선지·돼지족발이 올라가는 진한 레몬그라스 육수의 국수로, An Thoi의 대표 메뉴입니다. 처음엔 낯설 수 있지만 한 입 먹으면 특유의 깊고 칼칼한 국물에 빠져들어요.<br><br>함께 주문하면 좋은 메뉴: 반쎄오(베트남 팬케이크), 해산물 볶음밥. 프랑스 식민지 시대 건물을 개조한 예쁜 인테리어도 포토 스팟입니다.<br><br>⏱ <strong>18:00쯤 마무리 → 온다스파 18:10 도착</strong> (예약 18:30)',
-   tags:['미슐랭 빕구르망','곱창쌀국수 필수!','번호표 대기','반쎄오 추천','Bach Dang 강변']},
-  {time:'18:05',place:'도보 이동 → 온다스파',sub:'An Thoi에서 도보 약 5분 · 18:10 도착',costType:'free',hl:false,emoji:'🚶',
-   img:null,desc:'An Thoi(114 Bach Dang)에서 온다스파(142 Bach Dang)까지 같은 Bach Dang 거리를 따라 도보 약 5분. 한강변을 감상하며 걸어 예약 20분 전 18:10까지 도착하세요.',
-   tags:['도보 5분','Bach Dang 한강변','18:10 도착']},
+  {time:'18:05',place:'도보 이동 → 온다스파',sub:'한시장에서 도보 약 2분 · 18:10 도착',costType:'free',hl:false,emoji:'🚶',
+   img:null,desc:'한시장에서 온다스파(142 Bach Dang)까지 도보 약 2분. 한강 바로 앞 건물이라 걸어가는 길에 한강뷰도 즐기며 예약 20분 전 18:10까지 도착하세요.',
+   tags:['도보 2분','한강 바로 앞','18:10 도착']},
   {time:'18:30',place:'온다스파 (ONDA SPA) · 마사지 90분',sub:'예약 18:30 · 18:10 도착(20분 전) · 도깨비 바우처 30% 할인',cost:'~2.9~3.1만원/인',costType:'vnd',hl:true,emoji:'💆',
    img:I.massage,desc:'호텔 전체를 스파로 리노베이션한 한시장 No.1 신상 고급 스파. 베드 40개·개별룸 16개를 보유해 여유롭고 쾌적합니다. 모든 룸에 샤워시설이 갖춰져 있어요.<br><br>🕐 <strong>예약 18:30</strong> · 예약 20분 전 <strong>18:10까지 도착</strong> (늦으면 진행 시간 밀림 주의)<br><br>💰 <strong>다낭도깨비 바우처 30% 할인 적용가 (90분)</strong><br>아로마 90분: 504,000동 (~29,000원)/인<br>시그니처 90분: 537,600동 (~31,000원)/인<br>팁 별도: 60분 $2 · 90분 $3 · 120분 $4/인 (우리 90분=$3 ≈ 72,000동·4,200원)<br><br>💵 <strong>결제: 카드 불가 · 현금(동)·달러만</strong> (팁도 현금)<br><br>카카오톡 채널 「온다스파」로 한국어 예약 가능. 마무리 후 한강뷰를 감상하며 피로가 싹 풀리는 경험을 해보세요!',
    tags:['예약 18:30 · 18:10 도착','도깨비 바우처 30%','아로마 504,000동 (~29,000원)','시그니처 537,600동 (~31,000원)','한강뷰 스파','★4.9','카카오톡 예약','💵 카드 불가(현금)']},
-  {time:'20:15',place:'Grab으로 호텔 복귀',sub:'약 30분 · ~130,000 VND · 내일 08:00 출발 대비',cost:'~7,150원',costType:'vnd',hl:false,emoji:'🚕',
-   img:I.grab,desc:'내일 머드온천을 위해 08:00 호텔 출발이 예정되어 있으니, 오늘은 일찍 복귀해 충분히 쉬는 것이 좋습니다. Grab 앱으로 호출하면 약 30분이면 호텔에 도착합니다.',
-   tags:['Grab 앱 사용','내일 08:00 출발 대비']},
+  {time:'20:05',place:'도보 이동 → An Thoi',sub:'온다스파에서 도보 약 5분',costType:'free',hl:false,emoji:'🚶',
+   img:null,desc:'온다스파(142 Bach Dang)에서 An Thoi(114 Bach Dang)까지 같은 Bach Dang 거리를 따라 도보 약 5분. 마사지로 개운해진 뒤 한강변 야경을 감상하며 걸어가세요.',
+   tags:['도보 5분','Bach Dang 한강변']},
+  {time:'20:15',place:'An Thoi 저녁식사',sub:'2024 미슐랭 빕구르망 · 곱창쌀국수 · 번호표 15~30분 대기',cost:'~2.2~2.7만원/인',costType:'vnd',hl:true,emoji:'🍽',
+   img:I.antoi,desc:'114 Bach Dang Street에 위치한 2024 미슐랭 빕구르망 레스토랑. 입장 시 번호표를 뽑고 강변에서 대기하면 됩니다.<br><br>🌟 <strong>시그니처 메뉴: 곱창쌀국수 (Bun Bo Hue / Bun Long)</strong><br>다낭식 곱창쌀국수는 소곱창·선지·돼지족발이 올라가는 진한 레몬그라스 육수의 국수로, An Thoi의 대표 메뉴입니다. 처음엔 낯설 수 있지만 한 입 먹으면 특유의 깊고 칼칼한 국물에 빠져들어요.<br><br>함께 주문하면 좋은 메뉴: 반쎄오(베트남 팬케이크), 해산물 볶음밥. 프랑스 식민지 시대 건물을 개조한 예쁜 인테리어도 포토 스팟입니다.',
+   tags:['미슐랭 빕구르망','곱창쌀국수 필수!','번호표 대기','반쎄오 추천','Bach Dang 강변']},
+  {time:'21:30',place:'Grab으로 호텔 복귀',sub:'약 30분 · ~130,000 VND · 리조트 복귀',cost:'~7,150원',costType:'vnd',hl:false,emoji:'🚕',
+   img:I.grab,desc:'마사지와 저녁까지 마치고 리조트로 복귀합니다. 내일은 머드온천 투어가 있으니 오늘은 푹 쉬세요. Grab 앱으로 호출하면 약 30분이면 호텔에 도착합니다.',
+   tags:['Grab 앱 사용','내일 머드온천 투어']},
 ]);
 
 buildBud('bud1',[
@@ -1454,7 +1454,7 @@ function initMap(id){
   if(maps[id]){maps[id].invalidateSize();return;}
   const opt={zoomControl:false};
   if(id==='day1'){
-    const pts=[[16.057,108.2025,'공항','#e65100',1],[15.9628,108.2889,'신라모노그램','#007d7a',2],[16.0681,108.2241,'한시장','#e65100',3],[16.0682,108.2248,'An Thoi','#1565c0',4],[16.0672,108.2248,'온다스파','#c62828',5],[16.0676,108.2229,'멜리어 럭셔리','#6a1b9a',6]];
+    const pts=[[16.057,108.2025,'공항','#e65100',1],[15.9628,108.2889,'신라모노그램','#007d7a',2],[16.0681,108.2241,'한시장','#e65100',3],[16.0672,108.2248,'온다스파','#c62828',4],[16.0682,108.2248,'An Thoi','#1565c0',5],[16.0676,108.2229,'멜리어 럭셔리','#6a1b9a',6]];
     const m=L.map('map1',opt).setView([16.02,108.25],11);
     L.tileLayer(TILE,{attribution:ATTR}).addTo(m);
     pts.forEach(p=>L.marker([p[0],p[1]],{icon:mkIcon(p[3],p[4])}).bindPopup(`<b>${p[2]}</b>`).addTo(m));
