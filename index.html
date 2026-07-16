@@ -1021,6 +1021,35 @@ function doLogin(){
     #money .m-fx .tip{font-size:11px;color:var(--gray);margin-top:8px;border-top:1px dashed var(--border);padding-top:8px;}
 
     #money .m-foot{text-align:center;font-size:11px;color:var(--gray);margin-top:20px;line-height:1.6;}
+
+    /* ── 지출/환전 (지갑 레이어) ── */
+    #money .m-wallet{background:#fff;border:1px solid var(--border);border-radius:16px;padding:14px 16px;margin-top:16px;}
+    #money .m-wallet h3{margin:0 0 12px;font-size:14px;display:flex;align-items:center;gap:7px;color:var(--ink);}
+    #money .m-actrow{display:flex;gap:7px;align-items:center;margin-bottom:9px;}
+    #money .m-actrow select,#money .m-actrow input{height:40px;border:1px solid var(--border);border-radius:9px;background:var(--bg);color:var(--ink);font-size:14px;padding:0 10px;font-family:inherit;}
+    #money .m-actrow select{flex-shrink:0;width:78px;font-weight:600;}
+    #money .m-actrow input.amt{flex:1;text-align:right;font-weight:700;font-family:ui-monospace,"SF Mono",monospace;min-width:0;}
+    #money .m-actrow input.memo{flex:1;font-size:13px;min-width:0;}
+    #money .m-actbtn{height:40px;padding:0 16px;border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;color:#fff;flex-shrink:0;}
+    #money .m-actbtn.spend{background:var(--m-vnd);}
+    #money .m-actbtn.exch{background:var(--m-usd);}
+    #money .m-actbtn:active{opacity:0.85;}
+    #money .m-exch-preview{font-size:12px;color:var(--gray);margin:2px 2px 10px;min-height:16px;}
+    #money .m-exch-preview b{color:var(--m-usd);}
+    #money .m-log{margin-top:6px;}
+    #money .m-log-item{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:9px;background:var(--bg);margin-bottom:6px;font-size:13px;}
+    #money .m-log-item .badge{font-size:11px;font-weight:700;padding:2px 7px;border-radius:6px;color:#fff;flex-shrink:0;}
+    #money .m-log-item .badge.spend{background:var(--m-vnd);}
+    #money .m-log-item .badge.exch{background:var(--m-usd);}
+    #money .m-log-item .desc{flex:1;color:var(--ink);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    #money .m-log-item .amt{font-weight:700;font-family:ui-monospace,"SF Mono",monospace;color:var(--ink);flex-shrink:0;}
+    #money .m-log-item .del{width:24px;height:24px;border:none;background:transparent;color:var(--gray);font-size:16px;cursor:pointer;flex-shrink:0;border-radius:6px;}
+    #money .m-log-item .del:active{background:var(--border);}
+    #money .m-log-empty{text-align:center;color:var(--gray);font-size:12px;padding:12px 0;}
+    #money .m-tabs2{display:flex;gap:6px;margin-bottom:12px;}
+    #money .m-tab2{flex:1;padding:9px;border:1px solid var(--border);border-radius:10px;background:var(--bg);color:var(--gray);font-size:13px;font-weight:700;cursor:pointer;text-align:center;}
+    #money .m-tab2.on{background:var(--teal);color:#fff;border-color:var(--teal);}
+    #money .m-badge-init{font-size:10px;color:var(--gray);font-weight:400;}
     #money .m-reset{display:inline-block;margin-top:8px;color:var(--teal);font-size:11px;text-decoration:underline;cursor:pointer;}
   </style>
 
@@ -1054,6 +1083,39 @@ function doLogin(){
       <div class="m-phead"><div class="t"><span class="m-dot"></span>베트남 동 (VND)</div><div class="tot m-num"><span id="m-tot-vnd">0</span>동</div></div>
       <div id="m-rows-vnd"></div>
     </div></section>
+
+    <!-- 지출 / 환전 (지갑 레이어) -->
+    <div class="m-wallet">
+      <h3>💳 지출 · 환전 기록</h3>
+      <div class="m-tabs2">
+        <div class="m-tab2 on" id="m-mode-spend" onclick="mWalletMode('spend')">💸 지출</div>
+        <div class="m-tab2" id="m-mode-exch" onclick="mWalletMode('exch')">💱 환전 (USD→VND)</div>
+      </div>
+
+      <!-- 지출 입력 -->
+      <div id="m-spend-form">
+        <div class="m-actrow">
+          <select id="m-spend-cur"><option value="vnd">동 VND</option><option value="usd">달러 USD</option><option value="krw">원 KRW</option></select>
+          <input class="amt" id="m-spend-amt" type="number" inputmode="numeric" placeholder="금액">
+          <button class="m-actbtn spend" onclick="mSpend()">지출</button>
+        </div>
+        <div class="m-actrow">
+          <input class="memo" id="m-spend-memo" type="text" placeholder="메모 (예: 택시비, 저녁식사) — 선택">
+        </div>
+      </div>
+
+      <!-- 환전 입력 -->
+      <div id="m-exch-form" style="display:none;">
+        <div class="m-actrow">
+          <span style="font-size:14px;font-weight:600;color:var(--m-usd);flex-shrink:0;">$</span>
+          <input class="amt" id="m-exch-amt" type="number" inputmode="numeric" placeholder="환전할 달러 금액">
+          <button class="m-actbtn exch" onclick="mExchange()">환전</button>
+        </div>
+        <div class="m-exch-preview" id="m-exch-preview">달러를 입력하면 받을 동이 표시됩니다.</div>
+      </div>
+
+      <div class="m-log" id="m-log"></div>
+    </div>
 
     <div class="m-rates">
       <h3>📈 적용 환율 <span style="font-weight:400;color:var(--gray);font-size:11px;">(직접 수정 가능)</span></h3>
@@ -1641,6 +1703,7 @@ function initMap(id){
     Object.fromEntries(Object.entries(DATA).map(([k,v])=>[k, v.denoms.map(d=>d[1])]))
   ));
   let state = load() || JSON.parse(JSON.stringify(DEFAULTS));
+  let wlog = loadLog();
   let rates = { usdkrw:1380, vndkrw:0.0535, usdvnd:25800 };
 
   function load(){ try{ const s=localStorage.getItem('danang_money'); return s?JSON.parse(s):null; }catch(e){ return null; } }
@@ -1681,7 +1744,15 @@ function initMap(id){
   }
 
   function render(){
-    const t=totals();
+    const base=totals();  // 지폐로 센 초기 보유액
+    // 지출/환전 델타 적용 → 현재 잔액
+    const t={usd:base.usd, krw:base.krw, vnd:base.vnd};
+    wlog.forEach(e=>{
+      if(e.type==='spend'){ t[e.cur]-=e.amt; }
+      else if(e.type==='exch'){ t.usd-=e.usd; t.vnd+=e.vnd; }
+    });
+
+    // 지폐 행 소계 (초기 보유 기준 - 지폐는 원래 챙긴 양 표시)
     for(const cur in DATA){
       const box=document.getElementById(DATA[cur].el);
       if(!box) continue;
@@ -1694,6 +1765,7 @@ function initMap(id){
       });
     }
     const g=(id)=>document.getElementById(id);
+    // 통화별 헤더 합계 = 현재 잔액
     g('m-tot-usd').textContent=fmt(t.usd);
     g('m-tot-krw').textContent=fmt(t.krw);
     g('m-tot-vnd').textContent=fmt(t.vnd);
@@ -1710,11 +1782,76 @@ function initMap(id){
     g('m-grand').textContent=fmt(grand);
     g('m-grand-sub').textContent=`달러 ₩${fmt(usdW)} + 원화 ₩${fmt(t.krw)} + 동 ₩${fmt(vndWon)}`;
 
+    // 환전 미리보기 (남은 달러 기준)
     g('m-fx-usd').textContent=fmt(t.usd);
     const fxVnd=t.usd*rates.usdvnd;
     g('m-fx-vnd').textContent=fmt(fxVnd);
     g('m-fx-won').textContent=fmt(fxVnd*rates.vndkrw);
+
+    renderLog();
   }
+
+  // ── 지갑(지출/환전) 레이어 ──
+  function loadLog(){ try{ const s=localStorage.getItem('danang_wallet'); return s?JSON.parse(s):[]; }catch(e){ return []; } }
+  function saveLog(){ try{ localStorage.setItem('danang_wallet', JSON.stringify(wlog)); }catch(e){} }
+  const CUR_LABEL={usd:'$',krw:'₩',vnd:'₫'};
+  const CUR_NAME={usd:'달러',krw:'원',vnd:'동'};
+
+  function renderLog(){
+    const box=document.getElementById('m-log');
+    if(!box) return;
+    if(wlog.length===0){ box.innerHTML='<div class="m-log-empty">아직 기록이 없어요. 지출하거나 환전하면 여기에 쌓여요.</div>'; return; }
+    box.innerHTML='';
+    // 최신순
+    [...wlog].reverse().forEach((e)=>{
+      const realIdx=wlog.indexOf(e);
+      const item=document.createElement('div'); item.className='m-log-item';
+      if(e.type==='spend'){
+        item.innerHTML=`<span class="badge spend">지출</span>
+          <span class="desc">${e.memo?e.memo:CUR_NAME[e.cur]+' 사용'}</span>
+          <span class="amt">-${CUR_LABEL[e.cur]}${fmt(e.amt)}</span>
+          <button class="del" title="되돌리기">×</button>`;
+      } else {
+        item.innerHTML=`<span class="badge exch">환전</span>
+          <span class="desc">$${fmt(e.usd)} → 동</span>
+          <span class="amt">+₫${fmt(e.vnd)}</span>
+          <button class="del" title="되돌리기">×</button>`;
+      }
+      item.querySelector('.del').onclick=()=>{ wlog.splice(realIdx,1); saveLog(); render(); };
+      box.appendChild(item);
+    });
+  }
+
+  window.mWalletMode=function(mode){
+    document.getElementById('m-mode-spend').classList.toggle('on', mode==='spend');
+    document.getElementById('m-mode-exch').classList.toggle('on', mode==='exch');
+    document.getElementById('m-spend-form').style.display = mode==='spend'?'block':'none';
+    document.getElementById('m-exch-form').style.display = mode==='exch'?'block':'none';
+  };
+
+  window.mSpend=function(){
+    const cur=document.getElementById('m-spend-cur').value;
+    const amt=parseInt(document.getElementById('m-spend-amt').value)||0;
+    const memo=document.getElementById('m-spend-memo').value.trim();
+    if(amt<=0){ alert('지출 금액을 입력하세요.'); return; }
+    wlog.push({type:'spend',cur,amt,memo,ts:Date.now()});
+    saveLog();
+    document.getElementById('m-spend-amt').value='';
+    document.getElementById('m-spend-memo').value='';
+    render();
+  };
+
+  window.mExchange=function(){
+    const usd=parseInt(document.getElementById('m-exch-amt').value)||0;
+    if(usd<=0){ alert('환전할 달러 금액을 입력하세요.'); return; }
+    const vnd=Math.round(usd*rates.usdvnd);
+    wlog.push({type:'exch',usd,vnd,ts:Date.now()});
+    saveLog();
+    document.getElementById('m-exch-amt').value='';
+    document.getElementById('m-exch-preview').textContent='달러를 입력하면 받을 동이 표시됩니다.';
+    render();
+  };
+
 
   const rIn={usdkrw:document.getElementById('m-r-usdkrw'),vndkrw:document.getElementById('m-r-vndkrw'),usdvnd:document.getElementById('m-r-usdvnd')};
   function fillRateInputs(){
@@ -1756,6 +1893,21 @@ function initMap(id){
       render();
     }
   };
+
+  // 환전 미리보기 실시간
+  const exchAmtEl=document.getElementById('m-exch-amt');
+  if(exchAmtEl){
+    exchAmtEl.oninput=()=>{
+      const usd=parseInt(exchAmtEl.value)||0;
+      const pv=document.getElementById('m-exch-preview');
+      if(usd>0){
+        const vnd=Math.round(usd*rates.usdvnd);
+        pv.innerHTML=`<b>$${fmt(usd)}</b> 환전 시 약 <b style="color:var(--gold)">${fmt(vnd)}동</b> (≈ ₩${fmt(vnd*rates.vndkrw)}) 받아요`;
+      } else {
+        pv.textContent='달러를 입력하면 받을 동이 표시됩니다.';
+      }
+    };
+  }
 
   fillRateInputs();
   render();
