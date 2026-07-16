@@ -356,6 +356,36 @@ section.active{display:block;}
 }
 
 </style>
+<!-- Firebase (돈계산 지갑 실시간 공유) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+<script>
+  window.DANANG_FB = (function(){
+    const cfg = {
+      apiKey: "AIzaSyBi8iV25VM8PIzngawzNrPl0S0r7mDpX8g",
+      authDomain: "danang-wallet.firebaseapp.com",
+      databaseURL: "https://danang-wallet-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "danang-wallet",
+      storageBucket: "danang-wallet.firebasestorage.app",
+      messagingSenderId: "613751355041",
+      appId: "1:613751355041:web:2b32b6499984751988e2e0"
+    };
+    // 부부 공유 지갑 방 (한 방을 공유)
+    const ROOM = "seoyoon-dongjun";
+    try {
+      firebase.initializeApp(cfg);
+      const db = firebase.database();
+      return {
+        ok: true,
+        ref: db.ref('wallets/' + ROOM),
+        room: ROOM
+      };
+    } catch(e) {
+      console.warn('Firebase 초기화 실패, 로컬 모드로 동작:', e);
+      return { ok: false };
+    }
+  })();
+</script>
 </head>
 <body>
 
@@ -1062,6 +1092,7 @@ function doLogin(){
         <div class="cap">Total travel fund</div>
         <div class="total m-num">₩<span id="m-grand">—</span></div>
         <div class="sub" id="m-grand-sub">환율 불러오는 중…</div>
+        <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-size:11px;font-weight:600;" id="m-sync-status">연결 확인 중…</div>
       </div>
       <div class="m-chips">
         <div class="m-chip u"><div class="flag">🇺🇸</div><div class="amt m-num">$<span id="m-c-usd">0</span></div><div class="won m-num">≈ ₩<span id="m-c-usd-w">0</span></div></div>
@@ -1708,7 +1739,13 @@ function initMap(id){
   let rates = { usdkrw:1380, vndkrw:0.0535, usdvnd:25800 };
 
   function load(){ try{ const s=localStorage.getItem('danang_money'); return s?JSON.parse(s):null; }catch(e){ return null; } }
-  function save(){ try{ localStorage.setItem('danang_money', JSON.stringify(state)); }catch(e){} }
+  let _fbSyncing = false; // 원격 반영 중엔 재전송 막기
+  function save(){
+    try{ localStorage.setItem('danang_money', JSON.stringify(state)); }catch(e){}
+    if(!_fbSyncing && window.DANANG_FB && window.DANANG_FB.ok){
+      try{ window.DANANG_FB.ref.child('money').set(state); }catch(e){}
+    }
+  }
   function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
 
   for(const cur in DATA){
@@ -1794,7 +1831,12 @@ function initMap(id){
 
   // ── 지갑(지출/환전) 레이어 ──
   function loadLog(){ try{ const s=localStorage.getItem('danang_wallet'); return s?JSON.parse(s):[]; }catch(e){ return []; } }
-  function saveLog(){ try{ localStorage.setItem('danang_wallet', JSON.stringify(wlog)); }catch(e){} }
+  function saveLog(){
+    try{ localStorage.setItem('danang_wallet', JSON.stringify(wlog)); }catch(e){}
+    if(!_fbSyncing && window.DANANG_FB && window.DANANG_FB.ok){
+      try{ window.DANANG_FB.ref.child('wallet').set(wlog); }catch(e){}
+    }
+  }
   const CUR_LABEL={usd:'$',krw:'₩',vnd:'₫'};
   const CUR_NAME={usd:'달러',krw:'원',vnd:'동'};
 
@@ -1913,6 +1955,64 @@ function initMap(id){
   fillRateInputs();
   render();
   fetchRates();
+
+  // ── Firebase 실시간 공유 리스너 ──
+  (function initFbSync(){
+    if(!(window.DANANG_FB && window.DANANG_FB.ok)) {
+      // Firebase 미연결: 로컬 모드 안내
+      const st=document.getElementById('m-sync-status');
+      if(st){ st.textContent='📴 로컬 모드 (이 기기에만 저장)'; st.style.color='var(--gray)'; }
+      return;
+    }
+    const ref = window.DANANG_FB.ref;
+    const st=document.getElementById('m-sync-status');
+
+    // 최초 1회: 서버에 데이터 있으면 받아오고, 없으면 현재 로컬값 업로드
+    ref.once('value').then(snap=>{
+      const v = snap.val();
+      if(v && (v.money || v.wallet)){
+        _fbSyncing = true;
+        if(v.money) state = v.money;
+        if(v.wallet) wlog = v.wallet;
+        // 지폐 입력칸 갱신
+        for(const cur in DATA){
+          const box=document.getElementById(DATA[cur].el);
+          if(box){ DATA[cur].denoms.forEach((d,i)=>{ const inp=box.children[i]?.querySelector('input'); if(inp) inp.value=state[cur][i]||0; }); }
+        }
+        try{ localStorage.setItem('danang_money',JSON.stringify(state)); localStorage.setItem('danang_wallet',JSON.stringify(wlog)); }catch(e){}
+        render();
+        _fbSyncing = false;
+      } else {
+        // 서버가 비어있으면 현재 로컬값을 올림
+        ref.set({money:state, wallet:wlog});
+      }
+      if(st){ st.textContent='🔗 실시간 공유 중 (아내와 연결됨)'; st.style.color='var(--m-usd)'; }
+    }).catch(e=>{
+      if(st){ st.textContent='⚠️ 공유 연결 실패 · 로컬 모드'; st.style.color='var(--gray)'; }
+    });
+
+    // 실시간 수신: 상대방이 바꾸면 내 화면도 갱신
+    ref.child('money').on('value', snap=>{
+      const v=snap.val(); if(!v) return;
+      _fbSyncing = true;
+      state = v;
+      for(const cur in DATA){
+        const box=document.getElementById(DATA[cur].el);
+        if(box){ DATA[cur].denoms.forEach((d,i)=>{ const inp=box.children[i]?.querySelector('input'); if(inp) inp.value=state[cur][i]||0; }); }
+      }
+      try{ localStorage.setItem('danang_money',JSON.stringify(state)); }catch(e){}
+      render();
+      _fbSyncing = false;
+    });
+    ref.child('wallet').on('value', snap=>{
+      const v=snap.val();
+      _fbSyncing = true;
+      wlog = v || [];
+      try{ localStorage.setItem('danang_wallet',JSON.stringify(wlog)); }catch(e){}
+      render();
+      _fbSyncing = false;
+    });
+  })();
 })();
 
 </script>
