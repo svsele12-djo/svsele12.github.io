@@ -983,6 +983,7 @@ function doLogin(){
     #money .m-chip .amt{font-size:14px;font-weight:700;margin-top:1px;color:var(--ink);}
     #money .m-chip .won{font-size:10px;color:var(--gray);margin-top:2px;}
 
+    #money .m-sec{margin-top:14px;}
     #money .m-pnl{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-top:14px;}
     #money .m-phead{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--border);}
     #money .m-phead .t{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;color:var(--ink);}
@@ -1069,20 +1070,20 @@ function doLogin(){
       </div>
     </div>
 
-    <section class="u"><div class="m-pnl">
+    <div class="m-sec u"><div class="m-pnl">
       <div class="m-phead"><div class="t"><span class="m-dot"></span>미국 달러 (USD)</div><div class="tot m-num">$<span id="m-tot-usd">0</span></div></div>
       <div id="m-rows-usd"></div>
-    </div></section>
+    </div></div>
 
-    <section class="k"><div class="m-pnl">
+    <div class="m-sec k"><div class="m-pnl">
       <div class="m-phead"><div class="t"><span class="m-dot"></span>대한민국 원 (KRW)</div><div class="tot m-num"><span id="m-tot-krw">0</span>원</div></div>
       <div id="m-rows-krw"></div>
-    </div></section>
+    </div></div>
 
-    <section class="v"><div class="m-pnl">
+    <div class="m-sec v"><div class="m-pnl">
       <div class="m-phead"><div class="t"><span class="m-dot"></span>베트남 동 (VND)</div><div class="tot m-num"><span id="m-tot-vnd">0</span>동</div></div>
       <div id="m-rows-vnd"></div>
-    </div></section>
+    </div></div>
 
     <!-- 지출 / 환전 (지갑 레이어) -->
     <div class="m-wallet">
